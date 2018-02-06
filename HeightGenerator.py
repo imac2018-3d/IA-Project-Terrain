@@ -3,7 +3,8 @@ import numpy as np
 import mathutils
 import pickle
 import io
-from HeightMap import *
+import importlib
+import HeightMap
 
 def saveVertices(originalVertice):
     bpy.context.scene['originalVertice'] = pickle.dumps(originalVertice)
@@ -114,8 +115,7 @@ class OBJECT_OT_GenerateButton(bpy.types.Operator):
             else:
                 originalVertices = loadVertices()
         
-        print(originalVertices[0,:,:2],'\n',len(originalVertices[0,:]))
-        map = heightmap2(60, 60, True, originalVertices[0,:,0], originalVertices[0,:,1])
+        map = HeightMap.heightmap2(60, 60, 2, originalVertices[0,:,0], originalVertices[0,:,1], originalVertices[0,:,2], True)
         for i in range(0, len(mesh.vertices)):
             vertice = mesh.vertices[i]
             vertice.co = originalVertices[0,i] + originalVertices[1,i] * map[i] * size
@@ -141,6 +141,7 @@ def unregister():
     bpy.utils.unregister_module(__name__)
 
 if __name__ == "__main__":
+    importlib.reload(HeightMap)
     initSceneProperties(bpy.context.scene)
     register()
     
