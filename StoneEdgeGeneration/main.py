@@ -1,14 +1,19 @@
 from importlib import reload
 import sys 
 from PyQt5 import QtWidgets
-from StoneEdgeGeneration import utils, ui, Terrain, Asset
+from StoneEdgeGeneration import utils, UI, Terrain, Asset
+from StoneEdgeGeneration.UI import TerrainWindow, AssetWindow
 reload(utils)
-reload(ui)
+reload(UI)
+reload(Terrain)
+reload(Asset)
+reload(TerrainWindow)
+reload(AssetWindow)
 
 def loadTerrain():
 	try:  
 	    app = QtWidgets.QApplication(sys.argv) 
-	    window = ui.TerrainWindow()
+	    window = TerrainWindow.TerrainWindow()
 	    window.show()
 	    app.exit(app.exec_())
 
@@ -19,7 +24,7 @@ def loadTerrain():
 def loadAsset():
 	try:  
 	    app = QtWidgets.QApplication(sys.argv) 
-	    window = ui.AssetWindow()
+	    window = AssetWindow.AssetWindow()
 	    window.show()
 	    app.exit(app.exec_())
 
@@ -29,4 +34,4 @@ def loadAsset():
 
 if __name__ == '__main__':
 	loadTerrain()
-	loadAsset()
+	#loadAsset()
