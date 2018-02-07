@@ -228,8 +228,9 @@ class AssetsGenerator:
 
 
 # ======================================================================================================================
-# GESTION DU MODAL OPERATOR
+# GESTION DU CRYSTAL MUTATE MODAL OPERATOR
 # ======================================================================================================================
+
 
 class CrystalMutateModalOperator(bpy.types.Operator):
     """Move an object with the mouse, example"""
@@ -273,19 +274,73 @@ class CrystalMutateModalOperator(bpy.types.Operator):
         blf.size(font_id, 16, 72)
         blf.draw(font_id, "Crystal Mutate Operator. Left click to mutate. Esc or Right click to exit.")
 
+# ======================================================================================================================
+# GESTION DU CRYSTAL GENERATE MODAL OPERATOR
+# ======================================================================================================================
+
+
+class CrystalGenerateModalOperator(bpy.types.Operator):
+    """Move an object with the mouse, example"""
+    bl_idname = "object.crystal_generate_modal_operator"
+    bl_label = "Crystal Generate Modal Operator"
+
+    def __init__(self):
+        self.genotype = None
+
+    def modal(self, context, event):
+
+        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
+            print("left mouse pressed")
+            bpydeleteall()
+            self.genotype = CrystalGenetic()
+            self.genotype.compute_individual((0, 0, 0))
+            return {'RUNNING_MODAL'}
+
+        elif event.type in {'RIGHTMOUSE', 'ESC'}:
+            print("right mouse or escape pressed")
+            bpy.types.SpaceView3D.draw_handler_remove(self._handle, 'WINDOW')
+            return {'CANCELLED'}
+
+        return {'RUNNING_MODAL'}
+
+    def invoke(self, context, event):
+
+        print("invoke modal")
+        args = (context,)
+        self._handle = bpy.types.SpaceView3D.draw_handler_add(self.draw_callback_text, args, 'WINDOW', 'POST_PIXEL')
+        bpydeleteall()
+        self.genotype = CrystalGenetic()
+        self.genotype.compute_individual((0, 0, 0))
+
+        context.window_manager.modal_handler_add(self)
+        return {'RUNNING_MODAL'}
+
+    def draw_callback_text(self, context):
+        font_id = 0  # XXX, need to find out how best to get this.
+        # draw some text
+        blf.position(font_id, 15, 30, 0)
+        blf.size(font_id, 16, 72)
+        blf.draw(font_id, "Crystal Generate Operator. Left click to generate. Esc or Right click to exit.")
+
+# ======================================================================================================================
+# REGISTER MODALS
+# ======================================================================================================================
+
 
 def register():
     bpy.utils.register_class(CrystalMutateModalOperator)
+    bpy.utils.register_class(CrystalGenerateModalOperator)
 
 
 def unregister():
     bpy.utils.unregister_class(CrystalMutateModalOperator)
-
+    bpy.utils.unregister_class(CrystalGenerateModalOperator)
 
 if __name__ == "__main__":
     register()
 
     # test call
-    bpy.ops.object.crystal_mutate_modal_operator('INVOKE_DEFAULT')
+    # bpy.ops.object.crystal_mutate_modal_operator('INVOKE_DEFAULT')
+    bpy.ops.object.crystal_generate_modal_operator('INVOKE_DEFAULT')
 
     #unregister()
