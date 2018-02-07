@@ -21,6 +21,9 @@ class GenericGenetic:
            Calcule le phénotype (l'individu). Doit retourner le nom de l'objet 3D"""
         return None
 
+    def mutate_genotype(self):
+        """Doit être redéfinie. Créée une mutation dans le génotype aléatoirement."""
+
     def genotype_as_string(self):
         """Doit être réimplémentée. Retourna une version string du génotype."""
 
