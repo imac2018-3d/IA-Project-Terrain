@@ -1,9 +1,9 @@
 class GenericGenetic:
     """Classe abstraite pour gérer les individus"""
 
-    def __init__(self, parent=None):
-        """Crée un individu. Son génotype st alors aléatoirement généré"""
-        self.genotype = self.random_genotype()  # genotype de l'individu
+    def __init__(self, genotype=None, parent=None):
+        """Crée un individu. Son génotype st alors aléatoirement généré, sauf s'il est envoyé en paramètre"""
+        self.genotype = self.random_genotype() if genotype is None else genotype  # genotype de l'individu
         self.generated = None  # Nom de l'objet généré. None sinon.
         self.fitness = None  # Valeur de fitness (entre 0 et 1) calculée. None sinon.
         self.parentName = parent  # Nom blender de l'objet parent
@@ -23,9 +23,16 @@ class GenericGenetic:
 
     def mutate_genotype(self):
         """Doit être redéfinie. Créée une mutation dans le génotype aléatoirement."""
+        return
+
+    @staticmethod
+    def cross_genotypes(geno1, geno2):
+        """Doit être redéfinie. Prend deux génotypes en paramètres et renvoie une LIST de génotypes enfants."""
+        return []
 
     def genotype_as_string(self):
         """Doit être réimplémentée. Retourna une version string du génotype."""
+        return ""
 
     def __str__(self):
         return str(self.generated)

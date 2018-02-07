@@ -24,6 +24,17 @@ def bpydeleteall():
     bpy.ops.object.delete(use_global=False)
 
 
+def ensure_delete_all():
+    """The bpydeleteall helper doesn't work if scene is already empty. Use this instead."""
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1,  # l'ajout d'objet sert uniquement à ce que le reste ne
+                                          size=1,  # plante pas si la scène est vide au départ.
+                                          view_align=False,
+                                          location=(0, 0, 0),
+                                          enter_editmode=False)
+    bpy.ops.object.mode_set(mode='OBJECT')
+    bpydeleteall()
+
+
 def random_inside_unit_sphere(r = None):
     phi = random.uniform(0, 2 * math.pi)
     costheta = random.uniform(-1, 1)
