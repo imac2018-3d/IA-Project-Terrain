@@ -34,4 +34,4 @@ def loadAsset():
 
 if __name__ == '__main__':
 	loadTerrain()
-	#loadAsset()
+	loadAsset()

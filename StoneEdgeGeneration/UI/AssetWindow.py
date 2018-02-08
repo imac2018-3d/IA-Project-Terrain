@@ -1,9 +1,13 @@
 import sys 
 import bpy
+from importlib import reload
 
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 from PyQt5 import QtWidgets
+
+from StoneEdgeGeneration import utils
+reload(utils)
 
 class AssetWindow(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -23,12 +27,12 @@ class AssetWindow(QtWidgets.QWidget):
         resultGBox.setLayout(resultVBoxLayout)
         self.mainLayout.addWidget(resultGBox)
         
-        image1 = self.createImage("D:/coucou.png", resultVBoxLayout, 0, 0)
-        image2 = self.createImage("D:/coucou.png", resultVBoxLayout, 0, 1)
-        image3 = self.createImage("D:/coucou.png", resultVBoxLayout, 0, 2)
-        image4 = self.createImage("D:/coucou.png", resultVBoxLayout, 2, 0)
-        image5 = self.createImage("D:/coucou.png", resultVBoxLayout, 2, 1)
-        image6 = self.createImage("D:/coucou.png", resultVBoxLayout, 2, 2)
+        image1 = self.createImage("coucou.png", resultVBoxLayout, 0, 0)
+        image2 = self.createImage("coucou.png", resultVBoxLayout, 0, 1)
+        image3 = self.createImage("coucou.png", resultVBoxLayout, 0, 2)
+        image4 = self.createImage("coucou.png", resultVBoxLayout, 2, 0)
+        image5 = self.createImage("coucou.png", resultVBoxLayout, 2, 1)
+        image6 = self.createImage("coucou.png", resultVBoxLayout, 2, 2)
         
         nextGenerationButton = QtWidgets.QPushButton()
         nextGenerationButton.setText("Next Generation")
@@ -64,13 +68,9 @@ class AssetWindow(QtWidgets.QWidget):
         
         return slider
     
-    def createImage(self, filePath, gridLayout, row, column):
+    def createImage(self, imageName, gridLayout, row, column):
         image = QtWidgets.QPushButton()
-        # image.setStyleSheet("QWidget {width: 100px; height: 100px; background-image: url(" + filePath + ") 0 0 0 0 stretch stretch}")
-        # image.setPixmap(QPixmap(filepath))
-        # image.setScaledContents(true)
-        # image.adjustSize()
-        pixmap = QtGui.QPixmap(filePath)
+        pixmap = QtGui.QPixmap(utils.getImagesPath() + imageName)
         ButtonIcon = QtGui.QIcon(pixmap)
         image.setIcon(ButtonIcon)
         image.setIconSize(QtCore.QSize(100, 100))
