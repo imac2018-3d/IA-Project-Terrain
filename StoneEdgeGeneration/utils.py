@@ -13,7 +13,7 @@ def getImagePath(imageName=""):
     else:
         return folder
 
-def getModelsPath(modelName=""):
+def getModelPath(modelName=""):
     folder = BASE_PATH + "/StoneEdgeGeneration/Resources/Images/"
     if modelName:
         return os.path.normpath(os.path.join(folder, modelName + ".png"))

@@ -1,82 +1,95 @@
 import sys 
 import bpy
+from importlib import reload
 
 from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 from PyQt5 import QtWidgets
 
+from StoneEdgeGeneration import UI, utils
+reload(utils)
+from StoneEdgeGeneration.UI import Parameter
+reload(UI)
+reload(Parameter)
+
 class BaseWindow(QtWidgets.QWidget):
-    def __init__(self, parent=None):
-        super(BaseWindow, self).__init__(parent)
+    def __init__(self):
+        super(BaseWindow, self).__init__()
 
-        self.mainLayout = QtWidgets.QHBoxLayout()
+        self.mainLayout = QtWidgets.QGridLayout()
 
-        self.parametersLayout()
-        self.resultLayout()
-        
-        self.setLayout(self.mainLayout)
-        
-    def resultLayout(self):
-        resultGBox = QtWidgets.QGroupBox("Result")
-        resultVBoxLayout = QtWidgets.QGridLayout()
-        #resultVBoxLayout.addStretch(1)
-        resultGBox.setLayout(resultVBoxLayout)
-        self.mainLayout.addWidget(resultGBox)
-        
-        image1 = self.createImage("D:/coucou.png", resultVBoxLayout, 0, 0)
-        image2 = self.createImage("D:/coucou.png", resultVBoxLayout, 0, 1)
-        image3 = self.createImage("D:/coucou.png", resultVBoxLayout, 0, 2)
-        image4 = self.createImage("D:/coucou.png", resultVBoxLayout, 2, 0)
-        image5 = self.createImage("D:/coucou.png", resultVBoxLayout, 2, 1)
-        image6 = self.createImage("D:/coucou.png", resultVBoxLayout, 2, 2)
+        ''' PARAMETERS '''
+        self.parametersGBox = QtWidgets.QGroupBox("Parameters")
+        self.parametersVBoxLayout = QtWidgets.QVBoxLayout()
+        self.parametersGBox.setLayout(self.parametersVBoxLayout)
+        self.mainLayout.addWidget(self.parametersGBox, 0, 0)
+              
+        generateButton = QtWidgets.QPushButton()
+        generateButton.setText("Generate")
+        self.mainLayout.addWidget(generateButton, 1, 0)
+
+        ''' RESULT '''
+        self.resultGBox = QtWidgets.QGroupBox("Result")
+        self.resultGLayout = QtWidgets.QGridLayout()
+        self.resultGBox.setLayout(self.resultGLayout)
+        self.mainLayout.addWidget(self.resultGBox, 0, 1)
+        self.maxColumn = 4
+        self.elementRow = 0
+        self.elementColumn = 0
         
         nextGenerationButton = QtWidgets.QPushButton()
         nextGenerationButton.setText("Next Generation")
-        resultVBoxLayout.addWidget(nextGenerationButton, 4, 0)
-        
-        downloadButton = QtWidgets.QPushButton()
-        downloadButton.setText("Download Selection")
-        resultVBoxLayout.addWidget(downloadButton, 4, 2)
-        
-    def parametersLayout(self):
-        parametersGBox = QtWidgets.QGroupBox("Parameters")
-        parametersVBoxLayout = QtWidgets.QVBoxLayout()
-        parametersGBox.setLayout(parametersVBoxLayout)
-        self.mainLayout.addWidget(parametersGBox)
-        
-        param1 = self.createParameter("Parameter 1", parametersVBoxLayout)
-        param2 = self.createParameter("Parameter 2", parametersVBoxLayout)
-        param3 = self.createParameter("Parameter 3", parametersVBoxLayout)
-        param4 = self.createParameter("Parameter 4", parametersVBoxLayout)
-        
-        generateButton = QtWidgets.QPushButton()
-        generateButton.setText("Generate")
-        parametersVBoxLayout.addWidget(generateButton)
-        
-    def createParameter(self, title, layout, min=0, max=100):
-        sliderLabel = QtWidgets.QLabel()
-        sliderLabel.setText(title)
-        layout.addWidget(sliderLabel)
-        slider = QtWidgets.QSlider(Qt.Horizontal)
-        slider.setMinimum(min)
-        slider.setMaximum(max)
-        layout.addWidget(slider)
-        
-        return slider
-    
-    def createImage(self, filePath, gridLayout, row, column):
+        self.mainLayout.addWidget(nextGenerationButton, 1, 1)
+
+        self.setLayout(self.mainLayout)
+                 
+    def addIndividual(self, individual):
+        imageGBox = QtWidgets.QGroupBox()
+        imageVLayout = QtWidgets.QVBoxLayout()
+
+        self.resultGLayout.addWidget(imageGBox, self.elementRow, self.elementColumn)
+        if(self.elementColumn < self.maxColumn):
+            self.elementColumn += 1
+        else:
+            self.elementColumn = 0
+            self.elementRow += 1
+
+        # Image
         image = QtWidgets.QPushButton()
-        # image.setStyleSheet("QWidget {width: 100px; height: 100px; background-image: url(" + filePath + ") 0 0 0 0 stretch stretch}")
-        # image.setPixmap(QPixmap(filepath))
-        # image.setScaledContents(true)
-        # image.adjustSize()
-        pixmap = QtGui.QPixmap(filePath)
+        pixmap = QtGui.QPixmap(utils.getImagePath(individual.image))
         ButtonIcon = QtGui.QIcon(pixmap)
         image.setIcon(ButtonIcon)
         image.setIconSize(QtCore.QSize(100, 100))
-        gridLayout.addWidget(image, row, column)
+        imageVLayout.addWidget(image)
+
+        imageGBox.setLayout(imageVLayout)
+
+        # Save button and spinbox
+        buttonsGBox = QtWidgets.QGroupBox()
+        buttonsHLayout = QtWidgets.QHBoxLayout()
+        buttonsGBox.setLayout(buttonsHLayout)
+
+        weightSBox = QtWidgets.QSpinBox()
+        weightSBox.valueChanged.connect(individual.setWeight)
+        weightSBox.setValue(individual.weight)
+        buttonsHLayout.addWidget(weightSBox)
+
+        saveBtn = QtWidgets.QPushButton()
+        saveBtn.setText("Save")
+        buttonsHLayout.addWidget(saveBtn)
+
+        imageVLayout.addWidget(buttonsGBox)
+
+    def addSlider(self, parameter):
+        sliderLabel = QtWidgets.QLabel()
+        sliderLabel.setText(parameter.label)
+        self.parametersVBoxLayout.addWidget(sliderLabel)
+        slider = QtWidgets.QSlider(Qt.Horizontal)
         
-        spinBox = QtWidgets.QSpinBox()
-        gridLayout.addWidget(spinBox, row+1, column)
-        
-        return image
+        slider.setValue(parameter.value)
+        slider.setMinimum(parameter.min)
+        slider.setMaximum(parameter.max)
+
+        slider.valueChanged.connect(parameter.setValue)
+
+        self.parametersVBoxLayout.addWidget(slider)
