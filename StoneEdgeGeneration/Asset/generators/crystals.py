@@ -105,6 +105,7 @@ class CrystalGenetic(GenericGenetic):
                 child.select = True
             bpy.ops.object.delete()
             bpy.data.objects[self.generated].select = True
+            bpy.context.scene.objects.active = bpy.data.objects[self.generated]
             bpy.context.object.location = (0, 0, 0)
         else:  # ou on créée un nouveau container s'il n'y en a pas
             bpy.ops.object.add(type='EMPTY')
@@ -448,8 +449,8 @@ if __name__ == "__main__":
     register()
 
     # test call
-    # bpy.ops.object.crystal_mutate_modal_operator('INVOKE_DEFAULT')
+    bpy.ops.object.crystal_mutate_modal_operator('INVOKE_DEFAULT')
     # bpy.ops.object.crystal_generate_modal_operator('INVOKE_DEFAULT')
-    bpy.ops.object.crystal_cross_modal_operator('INVOKE_DEFAULT')
+    # bpy.ops.object.crystal_cross_modal_operator('INVOKE_DEFAULT')
 
     #unregister()
