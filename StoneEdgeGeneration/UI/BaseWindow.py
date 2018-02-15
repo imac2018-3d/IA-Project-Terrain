@@ -8,9 +8,11 @@ from PyQt5 import QtWidgets
 
 from StoneEdgeGeneration import UI, utils
 reload(utils)
-from StoneEdgeGeneration.UI import Parameter
+from StoneEdgeGeneration.UI import Parameter, Individual
 reload(UI)
 reload(Parameter)
+reload(Individual)
+
 
 class BaseWindow(QtWidgets.QWidget):
     def __init__(self):
@@ -26,6 +28,7 @@ class BaseWindow(QtWidgets.QWidget):
               
         generateButton = QtWidgets.QPushButton()
         generateButton.setText("Generate")
+        generateButton.clicked.connect(self.startGeneration)
         self.mainLayout.addWidget(generateButton, 1, 0)
 
         ''' RESULT '''
@@ -39,6 +42,7 @@ class BaseWindow(QtWidgets.QWidget):
         
         nextGenerationButton = QtWidgets.QPushButton()
         nextGenerationButton.setText("Next Generation")
+        nextGenerationButton.clicked.connect(self.clearResults)
         self.mainLayout.addWidget(nextGenerationButton, 1, 1)
 
         self.setLayout(self.mainLayout)
@@ -93,3 +97,15 @@ class BaseWindow(QtWidgets.QWidget):
         slider.valueChanged.connect(parameter.setValue)
 
         self.parametersVBoxLayout.addWidget(slider)
+
+    def clearResults(self):
+        print("Clear")
+        for i in reversed(range(self.resultGLayout.count())):
+            self.resultGLayout.itemAt(i).widget().deleteLater()
+
+    def startGeneration(self):
+        print("Generate")
+        for i in range(5):
+            individual = Individual.Individual(i, type="Crystal")
+            individual.createImage()
+            self.addIndividual(individual)
