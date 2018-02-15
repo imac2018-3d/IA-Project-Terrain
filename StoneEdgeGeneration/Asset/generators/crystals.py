@@ -100,6 +100,7 @@ class CrystalGenetic(GenericGenetic):
         bpy.context.scene.cursor_location = [0, 0, 0]
 
         if self.generated is not None:  # on supprime les anciens subcrystals s'il y en avait
+            print("re-compute " + self.generated)
             bpydeselect()
             for child in bpy.data.objects[self.generated].children:
                 child.select = True
@@ -109,8 +110,9 @@ class CrystalGenetic(GenericGenetic):
             bpy.context.object.location = (0, 0, 0)
         else:  # ou on créée un nouveau container s'il n'y en a pas
             bpy.ops.object.add(type='EMPTY')
-            bpy.context.object.name = "Crystal" + str(GenericGenetic.bobject_unique_id())
+            bpy.context.object.name = "Crystal" + '%03d' % GenericGenetic.bobject_unique_id()
             self.generated = bpy.context.object.name
+            print("computed " + self.generated)
 
         parent_obj = bpy.data.objects[self.generated]
 
@@ -276,6 +278,19 @@ class CrystalGenetic(GenericGenetic):
         """Le fitness ne retourne rien. Il est établi arbitrairement par l'utilisateur."""
         return None
 
+# Destructor -----------------------------------------------------------------------------------------------------------
+
+    def __del__(self):
+        """Quand le génotype est suprimmé, on vire aussi son phénotype s'il existe."""
+        if self.generated is not None:
+            bpydeselect()
+            for child in bpy.data.objects[self.generated].children:
+                child.select = True
+            bpy.ops.object.delete()
+            bpy.data.objects[self.generated].select = True
+            bpy.ops.object.delete()
+
+
 # ======================================================================================================================
 # TOOLS
 # ======================================================================================================================
@@ -430,6 +445,70 @@ class CrystalCrossModalOperator(bpy.types.Operator):
 
 
 # ======================================================================================================================
+# GESTION DU CRYSTAL GENERATIONAL MODAL
+# ======================================================================================================================
+
+
+class CrystalGenerationalModalOperator(bpy.types.Operator):
+    """Move an object with the mouse, example"""
+    bl_idname = "object.crystal_generational_modal_operator"
+    bl_label = "Crystal Generational Modal Operator"
+
+    def __init__(self):
+        return
+
+    def modal(self, context, event):
+
+        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
+
+            self.generator.next_generation()
+            self.generator.genotypes[2].fitness = 0.8
+            self.generator.genotypes[4].fitness = 0.8
+            self.generator.genotypes[8].fitness = 0.8
+            self.generator.genotypes[0].fitness = 0.8
+            print("")
+            print(repr(self.generator))
+
+            return {'RUNNING_MODAL'}
+
+        elif event.type in {'RIGHTMOUSE', 'ESC'}:
+            bpy.types.SpaceView3D.draw_handler_remove(self._handle, 'WINDOW')
+            return {'CANCELLED'}
+
+        return {'RUNNING_MODAL'}
+
+    def invoke(self, context, event):
+
+        args = (context,)
+        self._handle = bpy.types.SpaceView3D.draw_handler_add(self.draw_callback_text, args, 'WINDOW', 'POST_PIXEL')
+        ensure_delete_all()
+
+        self.generator = AssetGeneticsController(
+            genetic_class=CrystalGenetic,
+            max_genotypes=9,
+            selection_type="number",
+            selection_type_param=4,
+            show_mode='all'
+        )
+
+        self.generator.genotypes[2].fitness = 0.8
+        self.generator.genotypes[4].fitness = 0.8
+        self.generator.genotypes[8].fitness = 0.8
+        self.generator.genotypes[0].fitness = 0.8
+
+        print(repr(self.generator))
+
+        context.window_manager.modal_handler_add(self)
+        return {'RUNNING_MODAL'}
+
+    def draw_callback_text(self, context):
+        font_id = 0  # XXX, need to find out how best to get this.
+        # draw some text
+        blf.position(font_id, 50, 30, 0)
+        blf.size(font_id, 16, 48)
+        blf.draw(font_id, "Crystal Generational Operator. Left click to next generation. Esc or Right click to exit.")
+
+# ======================================================================================================================
 # REGISTER MODALS
 # ======================================================================================================================
 
@@ -438,19 +517,22 @@ def register():
     bpy.utils.register_class(CrystalMutateModalOperator)
     bpy.utils.register_class(CrystalGenerateModalOperator)
     bpy.utils.register_class(CrystalCrossModalOperator)
+    bpy.utils.register_class(CrystalGenerationalModalOperator)
 
 
 def unregister():
     bpy.utils.unregister_class(CrystalMutateModalOperator)
     bpy.utils.unregister_class(CrystalGenerateModalOperator)
     bpy.utils.unregister_class(CrystalCrossModalOperator)
+    bpy.utils.unregister_class(CrystalGenerationalModalOperator)
 
 if __name__ == "__main__":
     register()
 
     # test call
-    bpy.ops.object.crystal_mutate_modal_operator('INVOKE_DEFAULT')
+    # bpy.ops.object.crystal_mutate_modal_operator('INVOKE_DEFAULT')
     # bpy.ops.object.crystal_generate_modal_operator('INVOKE_DEFAULT')
     # bpy.ops.object.crystal_cross_modal_operator('INVOKE_DEFAULT')
+    bpy.ops.object.crystal_generational_modal_operator('INVOKE_DEFAULT')
 
     #unregister()
