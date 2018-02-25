@@ -4,6 +4,7 @@ import mathutils
 import pickle
 import io
 import importlib
+#from StoneEdgeGeneration import HeightMap
 import HeightMap
 
 def saveVertices(originalVertice):
@@ -30,22 +31,21 @@ def initSceneProperties(scn):
     bpy.types.Scene.vct = bpy.props.FloatProperty(name = "Vertices count",
         default = 100,
         min = 4,
-        max = 4000000)
-
+        max = 40000)
     
-    if "paramone" in scn:
-        del scn["paramone"]
-    scn["paramone"] = 1.
-    bpy.types.Scene.paramone = bpy.props.FloatProperty(name = "Param 1",
-        default = 1.,
-        min = 0.,
-        max = 100.)
+    if "mean" in scn:
+        del scn["mean"]
+    scn["mean"] = 0.
+    bpy.types.Scene.mean = bpy.props.FloatProperty(name = "Mean",
+        default = scn["mean"],
+        min = -2.,
+        max = 2.)
     
-    if "paramtwo" in scn:
-        del scn["paramtwo"]
-    scn["paramtwo"] = 1.
-    bpy.types.Scene.paramtwo = bpy.props.FloatProperty(name = "Param 2",
-        default = 1.,
+    if "scale" in scn:
+        del scn["scale"]
+    scn["scale"] = 1.
+    bpy.types.Scene.scale = bpy.props.FloatProperty(name = "Scale",
+        default = scn["scale"],
         min = 0.,
         max = 100.)
         
@@ -53,9 +53,72 @@ def initSceneProperties(scn):
         del scn["size"]
     scn["size"] = 1.
     bpy.types.Scene.size = bpy.props.FloatProperty(name = "Size",
-        default = 1.,
+        default = scn["size"],
         min = 0.,
         max = 100.)
+        
+    if "smooth" in scn:
+        del scn["smooth"]
+    scn["smooth"] = True
+    bpy.types.Scene.smooth = bpy.props.BoolProperty(name = "Smooth",
+        default = scn["smooth"])
+
+    if "coefMapOne" in scn:
+        del scn["coefMapOne"]
+    scn["coefMapOne"] = 0.5
+    bpy.types.Scene.coefMapOne = bpy.props.FloatProperty(name = "Coef Map1",
+        default=scn["coefMapOne"],
+        min = 0.,
+        max = 1.)
+        
+    if "coefMapTwo" in scn:
+        del scn["coefMapTwo"]
+    scn["coefMapTwo"] = 0.5
+    bpy.types.Scene.coefMapTwo = bpy.props.FloatProperty(name = "Coef Map2",
+        default = scn["coefMapTwo"],
+        min = 0.,
+        max = 1.)
+        
+    if "octaves" in scn:
+        del scn["octaves"]
+    scn["octaves"] = 1
+    bpy.types.Scene.octaves = bpy.props.IntProperty(name = "Octaves",
+        default = scn["octaves"],
+        min = 0,
+        max = 100)
+        
+    if "lacunarity" in scn:
+        del scn["lacunarity"]
+    scn["lacunarity"] = 2.0
+    bpy.types.Scene.lacunarity = bpy.props.FloatProperty(name = "Lacunarity",
+        default = scn["lacunarity"],
+        min = 1.,
+        max = 100.)
+        
+    if "frequences" in scn:
+        del scn["frequences"]
+    scn["frequences"] = 5.0
+    bpy.types.Scene.frequences = bpy.props.FloatProperty(name = "Frequences",
+        default = scn["frequences"],
+        min = -50.,
+        max = 50.)
+
+    if "randomType" in scn:
+        del scn["randomType"]
+    scn["randomType"] = 0
+    bpy.types.Scene.randomType = bpy.props.IntProperty(name="Random type",
+        default = scn["randomType"],
+        min = 0,
+        max = 10)
+
+    if "seed" in scn:
+        del scn["seed"]
+    scn["seed"] = 0
+    bpy.types.Scene.seed = bpy.props.IntProperty(name="Seed",
+        default = scn["seed"],
+        min = -1,
+        max = 1000)
+    
     
 class HeightMapPanel(bpy.types.Panel):
     """Creates a Panel in the scene context of the properties editor"""
@@ -73,9 +136,20 @@ class HeightMapPanel(bpy.types.Panel):
         row = layout.row()
         row.prop(context.scene, "vct")
         row = layout.row()
-        row.prop(context.scene, "paramone")
-        row.prop(context.scene, "paramtwo")
+        row.prop(context.scene, "coefMapOne")
+        row.prop(context.scene, "coefMapTwo")
         row.prop(context.scene, "size")
+        row = layout.row()
+        row.prop(context.scene, "lacunarity")
+        row.prop(context.scene, "octaves")
+        row = layout.row()
+        row.prop(context.scene, "frequences")
+        row.prop(context.scene, "mean")
+        row.prop(context.scene, "scale")
+        row = layout.row()
+        row.prop(context.scene, "randomType")
+        row.prop(context.scene, "seed")
+        row.prop(context.scene, "smooth")
         # Big render button
         row = layout.row()
         row.operator("generator.height", text="Generate Map")
@@ -91,7 +165,9 @@ class OBJECT_OT_GenerateButton(bpy.types.Operator):
     bl_label = "Height Generator"
 
 
-    def generate(self, vertcount, param1, param2, size, mapObject):
+    def generate(self, vertcount, coefMapOne, coefMapTwo,
+                smooth, octaves, lacunarity, freq, size,
+                mean, scale, randomType, seed, mapObject):
         if mapObject == None:
             lastMapObject = None
             return
@@ -115,20 +191,32 @@ class OBJECT_OT_GenerateButton(bpy.types.Operator):
             else:
                 originalVertices = loadVertices()
         
-        map = HeightMap.heightmap2(60, 60, 2, originalVertices[0,:,0], originalVertices[0,:,1], originalVertices[0,:,2], True)
+        map = HeightMap.heightmap3(100, 100, 5, originalVertices[0,:,0], originalVertices[0,:,1], originalVertices[0,:,2],
+                                   coefMap1=coefMapOne, coefMap2=coefMapTwo,
+                                   smooth=True, octaves=octaves, lacunarity=lacunarity,
+                                   freq=freq*2, freq2=freq*2, mean=mean, scale=scale,
+                                   randomtype=randomType, seed=seed)
         for i in range(0, len(mesh.vertices)):
             vertice = mesh.vertices[i]
             vertice.co = originalVertices[0,i] + originalVertices[1,i] * map[i] * size
         
         bpy.ops.object.mode_set(mode='EDIT')
-        bpy.ops.mesh.vertices_smooth(factor=0.7, repeat=2)
+        bpy.ops.mesh.vertices_smooth(factor=0.5, repeat=1)
         bpy.ops.object.mode_set(mode='OBJECT')
     
     def execute(self, context):
         self.generate(bpy.context.scene["vct"], 
-                    bpy.context.scene["paramone"], 
-                    bpy.context.scene["paramtwo"], 
-                    bpy.context.scene["size"], 
+                    bpy.context.scene["coefMapOne"],
+                    bpy.context.scene["coefMapTwo"],
+                    bpy.context.scene["smooth"],
+                    bpy.context.scene["octaves"], 
+                    bpy.context.scene["lacunarity"],
+                    bpy.context.scene["frequences"],
+                    bpy.context.scene["size"],
+                    bpy.context.scene["mean"],
+                    bpy.context.scene["scale"], 
+                    bpy.context.scene["randomType"],
+                    bpy.context.scene["seed"],
                     HeightMapPanel.mapObject.parent)
         return {'FINISHED'}
         
@@ -140,8 +228,11 @@ def unregister():
     bpy.utils.unregister_class(HeightMapPanel)
     bpy.utils.unregister_module(__name__)
 
+def loadTool():
+    initSceneProperties(bpy.context.scene)
+    register()    
+
 if __name__ == "__main__":
     importlib.reload(HeightMap)
-    initSceneProperties(bpy.context.scene)
-    register()
+    loadTool()
     

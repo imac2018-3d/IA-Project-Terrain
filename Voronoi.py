@@ -120,7 +120,7 @@ def main():
     plt.pause(1)
 
 
-    image = Image.new('RGB', (200,200), (255,255,255))
+    image = Image.new('RGB', (500,500), (255,255,255))
     draw = ImageDraw.Draw(image)
     for region in map.regions:
         region.draw(draw, map, image.size)
