@@ -1,11 +1,14 @@
-from assgenutils import *
-from genericgenetic import *
+from StoneEdgeGeneration import Asset
+from StoneEdgeGeneration.Asset.assgenutils import *
+from StoneEdgeGeneration.Asset.genericgenetic import *
 
 import io
 import numpy as np
 
 import blf
 import copy
+
+import bpy
 
 class CrystalGenetic(GenericGenetic):
     """Représente un individu de cristal avec son génotype"""

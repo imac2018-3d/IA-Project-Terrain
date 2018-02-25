@@ -98,14 +98,21 @@ class BaseWindow(QtWidgets.QWidget):
 
         self.parametersVBoxLayout.addWidget(slider)
 
+    def addRadioButtons(self, parameter):
+        buttonLabel = QtWidgets.QLabel()
+        buttonLabel.setText(parameter.label)
+        self.parametersVBoxLayout.addWidget(buttonLabel)
+
+        grpBtn = QtWidgets.QButtonGroup(self.parametersGBox)
+
+        for key, value in parameter.values.items():
+            btn = QtWidgets.QRadioButton(key)
+            btn.setChecked(value)
+            grpBtn.addButton(btn)
+            self.parametersVBoxLayout.addWidget(btn)
+
     def clearResults(self):
         print("Clear")
         for i in reversed(range(self.resultGLayout.count())):
             self.resultGLayout.itemAt(i).widget().deleteLater()
 
-    def startGeneration(self):
-        print("Generate")
-        for i in range(5):
-            individual = Individual.Individual(i, type="Crystal")
-            individual.createImage()
-            self.addIndividual(individual)
