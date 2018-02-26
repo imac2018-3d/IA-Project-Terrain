@@ -64,6 +64,23 @@ def filter(sizex = 11, mode='hamming', arg=32):
     else:
         return np.kaiser(sizex, arg)
 
+def getrandomname(randomtype=0):
+    if randomtype == 1:
+        return 'wald'
+    elif randomtype == 2:
+        return 'vonmises'
+    elif randomtype == 3:
+        return 'uniform'
+    elif randomtype == 4:
+        return 'poisson'
+    elif randomtype == 5:
+        return 'rayleigh'
+    elif randomtype == 6:
+        return 'normal'
+    elif randomtype == 7:
+        return 'laplace'
+    return 'gamma'
+
 def getrandomfunc(randomtype=0, seed=-1):
     if seed < 0:
         np.random.seed(None)

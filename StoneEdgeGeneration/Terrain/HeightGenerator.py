@@ -4,8 +4,7 @@ import mathutils
 import pickle
 import io
 import importlib
-#from StoneEdgeGeneration import HeightMap
-import HeightMap
+from StoneEdgeGeneration.Terrain import HeightMap
 
 def saveVertices(originalVertice):
     bpy.context.scene['originalVertice'] = pickle.dumps(originalVertice)
