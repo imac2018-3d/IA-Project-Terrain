@@ -1,6 +1,9 @@
-from StoneEdgeGeneration import Asset
-from StoneEdgeGeneration.Asset.assgenutils import *
-from StoneEdgeGeneration.Asset.genericgenetic import *
+#from StoneEdgeGeneration import Asset
+#from StoneEdgeGeneration.Asset.assgenutils import *
+#from StoneEdgeGeneration.Asset.genericgenetic import *
+
+from assgenutils import *
+from genericgenetic import *
 
 import io
 import numpy as np
@@ -100,7 +103,7 @@ class CrystalGenetic(GenericGenetic):
     def compute_individual(self, location):
         """Génère un cristal"""
 
-        bpy.context.scene.cursor_location = [0, 0, 0]
+        #bpy.context.scene.cursor_location = [0, 0, 0]
 
         if self.generated is not None:  # on supprime les anciens subcrystals s'il y en avait
             print("re-compute " + self.generated)
@@ -109,13 +112,14 @@ class CrystalGenetic(GenericGenetic):
                 child.select = True
             bpy.ops.object.delete()
             bpy.data.objects[self.generated].select = True
-            bpy.context.scene.objects.active = bpy.data.objects[self.generated]
-            bpy.context.object.location = (0, 0, 0)
+            bpy.data.scenes[0].objects.active = bpy.data.objects[self.generated]
         else:  # ou on créée un nouveau container s'il n'y en a pas
             bpy.ops.object.add(type='EMPTY')
-            bpy.context.object.name = "Crystal" + '%03d' % GenericGenetic.bobject_unique_id()
-            self.generated = bpy.context.object.name
+            bpy.data.scenes[0].objects.active.name = "Crystal" + '%03d' % GenericGenetic.bobject_unique_id()
+            self.generated = bpy.data.scenes[0].objects.active.name
             print("computed " + self.generated)
+
+        bpy.data.objects[self.generated].location = (0, 0, 0)
 
         parent_obj = bpy.data.objects[self.generated]
 
@@ -127,9 +131,10 @@ class CrystalGenetic(GenericGenetic):
                                                   view_align=False,
                                                   location=(0, 0, 0),
                                                   enter_editmode=False)
-            bpy.context.object.parent = parent_obj
-            bpy.context.object.name = "Sub" + parent_obj.name + "-" + str(idx)
-            object_ref = bpy.context.object
+            object_ref = bpy.data.scenes[0].objects.active
+            object_ref.parent = parent_obj
+            object_ref.name = "Sub" + parent_obj.name + "-" + str(idx)
+
 
             # Etape 2 : on cutte
             for cut in subcrystal['cuts']:
@@ -154,8 +159,8 @@ class CrystalGenetic(GenericGenetic):
             )
 
             # Etape 4 : on tourne et on positionne
-            bpy.context.object.rotation_euler[0] = subcrystal['orientation'][1]
-            bpy.context.object.rotation_euler[2] = subcrystal['orientation'][0]
+            object_ref.rotation_euler[0] = subcrystal['orientation'][1]
+            object_ref.rotation_euler[2] = subcrystal['orientation'][0]
             object_ref.location = (
                 (subcrystal['scale'][2] + subcrystal['offset']) * math.sin(subcrystal['orientation'][0]) * math.sin(subcrystal['orientation'][1]),
                 (subcrystal['scale'][2] + subcrystal['offset']) * -math.cos(subcrystal['orientation'][0]) * math.sin(subcrystal['orientation'][1]),
