@@ -6,8 +6,8 @@ from PyQt5.QtCore import QTimer
 
 from StoneEdgeGeneration.UI.BaseWindow import BaseWindow
 
-import StoneEdgeGeneration.Communication
-from StoneEdgeGeneration.Communication import *
+import StoneEdgeGeneration.Communication.Communication
+from StoneEdgeGeneration.Communication.Communication import *
 
 import logging
 from logging.handlers import RotatingFileHandler

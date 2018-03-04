@@ -9,9 +9,8 @@ if blend_dir not in sys.path:
 	sys.path.append(blend_dir)
 
 from StoneEdgeGeneration import main
-from StoneEdgeGeneration import process_client
-import StoneEdgeGeneration.Communication
-from StoneEdgeGeneration.Communication import Communication
+from StoneEdgeGeneration.Communication import process_client
+from StoneEdgeGeneration.Communication.Communication import Communication
 import StoneEdgeGeneration.bpyutils as bpyutils
 import StoneEdgeGeneration.utils as utils
 
@@ -116,7 +115,7 @@ if __name__ == "__main__":
 	reload(process_client)
 	reload(utils)
 	reload(bpyutils)
-	reload(StoneEdgeGeneration.Communication)
+	reload(Communication)
 
 	register()
 

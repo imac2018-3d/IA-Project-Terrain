@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt
 from PyQt5 import QtGui, QtCore
 from PyQt5 import QtWidgets
 
-from StoneEdgeGeneration.Communication import Communication
+from StoneEdgeGeneration.Communication.Communication import Communication
 from StoneEdgeGeneration import UI
 from StoneEdgeGeneration.UI import Individual, Parameter
 from StoneEdgeGeneration.Asset import genericgenetic

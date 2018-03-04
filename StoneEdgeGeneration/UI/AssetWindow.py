@@ -1,6 +1,6 @@
 import time
 
-from StoneEdgeGeneration.Communication import Communication
+from StoneEdgeGeneration.Communication.Communication import Communication
 from StoneEdgeGeneration.Asset import genericgenetic
 from StoneEdgeGeneration.Asset.generators import crystals
 from StoneEdgeGeneration.UI import BaseWindow, Parameter

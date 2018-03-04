@@ -4,6 +4,26 @@ import noise
 import scipy
 import scipy.interpolate
 import scipy.ndimage
+from cmath import rect
+nprect = np.vectorize(rect)
+_angles = np.arange(2 * np.pi + 0.001, step=0.001)
+c = nprect(1, _angles)
+sinus, cosinus = c.imag, c.real
+
+
+def fastcos(x):
+    x = np.asarray(x * (len(_angles)-1) / (2 * np.pi), dtype=int) % np.int(len(_angles))
+    return cosinus[x]
+
+
+def fastsin(x):
+    x = np.asarray(x * (len(_angles)-1) / (2 * np.pi), dtype=int) % np.int(len(_angles))
+    return sinus[x]
+
+
+def fastcosin(x):
+    x = np.asarray(x * (len(_angles)-1) / (2 * np.pi), dtype=int) % np.int(len(_angles))
+    return cosinus[x], sinus[x]
 
 def griddata(points, xx, yy, zz, xmin, xmax, ymin, ymax, zmin, zmax):
     XX = ((points.shape[0]-1) * ((xx - xmin) / (xmax - xmin))).astype(int)
@@ -137,7 +157,7 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
         i = shiftx+x*freqx
         j = shifty+y*freqy
         k = z*freqz+randomfunc(mean, scale) * 0.2
-        value = (np.cos(i) + np.sin(j) + np.cos(k) * np.sin(k)) / 3
+        value = (fastcos(i) + fastsin(j) + fastcos(k) * fastsin(k)) / 3
         if abs(value) < 0.4:
             value = value * value * np.sign(value)
         return value
@@ -146,8 +166,15 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
     for i in range(points.shape[0]):
         for j in range(points.shape[1]):
             for k in range(points.shape[2]):
-                value = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
-                points[i][j][k] = value
+                if i % 2 == 0 and j % 2 == 0:
+                    value = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
+                    points[i][j][k] = value
+                elif i % 2 == 0:
+                    points[i][j][k] = points[i][j][k]
+                elif j % 2 == 0:
+                    points[i][j][k] = points[i - 1][j][k]
+                else:
+                    points[i][j][k] = points[i - 1][j - 1][k]
 
     randvalue = randomfunc(mean, scale, points.shape) * 0.3
     randvalue = randvalue + randomfunc(mean, scale, points.shape) * 0.1
