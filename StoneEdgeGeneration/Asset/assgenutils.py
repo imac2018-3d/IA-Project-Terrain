@@ -2,7 +2,6 @@ import bpy
 import random
 import math
 
-
 def bpydeselect():
     bpy.ops.object.select_all(action='DESELECT')
 

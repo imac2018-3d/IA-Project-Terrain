@@ -1,6 +1,8 @@
 import io
 import math
 import random
+import execnet
+from importlib import import_module
 
 class GenericGenetic:
     """Classe abstraite pour gérer les individus"""
@@ -21,14 +23,34 @@ class GenericGenetic:
         """Doit être redéfinie. Calcule et retourne la valeur de fitness (entre 0 et 1)"""
         return None
 
-    def compute_individual(self, location):
-        """Doit être redéfinie si un object 3D représente l'individu.
-           Calcule le phénotype (l'individu). Doit retourner le nom de l'objet 3D"""
-        return None
+    @staticmethod
+    def camera_position():
+        """Retourne la position de la camera pour le rendu"""
+        return (-5,-5,5)
+
+    def process_individual_data(self):
+        """
+        traite et renvoie les données nécessaires à la création de l'individu
+        :return: la serialisation des données traitées
+        """
+        return execnet.dumps(None)
 
     def mutate_genotype(self):
         """Doit être redéfinie. Créée une mutation dans le génotype aléatoirement."""
         return
+
+    @staticmethod
+    def net_compute_individual(location, data):
+        """
+        demande au server de créer un object 3D représentant l'individu
+        :return un script permettant de créer l'objet (en utilisant compute_individual) -> str
+        """
+        return ""
+
+    @staticmethod
+    def compute_individual(location, data):
+        """Doit être redéfinie si un object 3D représente l'individu.
+           crée un object 3D à partir des données créées par process_individual_data"""
 
     @staticmethod
     def cross_genotypes(geno1, geno2):
@@ -81,7 +103,22 @@ class AssetGeneticsController:
         self.show_mode = show_mode
 
         self.fill_genotypes()
-        self.create_phenotypes(mode=self.show_mode)
+        #self.create_phenotypes(mode=self.show_mode)
+
+    def reset(self, genetic_class, max_genotypes=50,
+                selection_type='threshold', selection_type_param=float('nan'),
+                alt_procreation=False, show_mode='all'):
+        self.currentGeneration = 0
+        self.maxGenotypes = max_genotypes
+        if self.geneticClass != genetic_class:
+            self.geneticClass = genetic_class
+            self.genotypes.clear()
+        self.selection_type = selection_type
+        self.selection_type_param = selection_type_param
+        self.alt_procreation = alt_procreation
+        self.show_mode = show_mode
+
+        self.fill_genotypes()
 
     def __repr__(self):
         buf = io.StringIO()
@@ -92,13 +129,17 @@ class AssetGeneticsController:
         buf.close()
         return ret
 
+    def get_genetic_class(self):
+        module = import_module(self.geneticClass[0])
+        return getattr(module, self.geneticClass[1])
+
     def fill_genotypes(self):
         """Remplit les cases vides des génotypes avec de nouveaux génotypes aléatoires.
         Retourne le nombre d'objets générés"""
         start = len(self.genotypes) + 1
         end = self.maxGenotypes + 1
         for i in range(start, end):
-            self.genotypes.append(self.geneticClass(parent=self.parentObject))
+            self.genotypes.append(self.get_genetic_class()(parent=self.parentObject))
         return start - end
 
     def natural_selection_threshold(self, threshold):
@@ -174,7 +215,7 @@ class AssetGeneticsController:
         elif self.selection_type == 'number':
             if math.isnan(self.selection_type_param) or self.selection_type_param < 0:
                 raise ValueError('selection_type_param must be defined and be positive.')
-            self.natural_selection_number(self.selection_type_param)
+            self.natural_selection_number(int(self.selection_type_param*len(self.genotypes)))
         elif self.selection_type == 'probability':
             self.natural_selection_probability()
         else:
@@ -198,5 +239,5 @@ class AssetGeneticsController:
 
         # Finished !
         self.currentGeneration += 1
-        self.create_phenotypes(mode=self.show_mode)
+        #self.create_phenotypes(mode=self.show_mode)
 

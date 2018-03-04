@@ -89,11 +89,11 @@ def getrandomfunc(randomtype=0, seed=-1):
 
     if randomtype == 1:
         def wald(mean, scale, shape=1):
-            return np.random.wald(mean, scale, shape)
+            return np.random.wald(max(0.1,mean), max(0.1, scale), shape)
         return wald
     elif randomtype == 2:
         def vonmises(mean, scale, shape=1):
-            return np.random.vonmises(mean, scale, shape)
+            return np.random.vonmises(mean, max(0.1, scale), shape)
         return vonmises
     elif randomtype == 3:
         def uniform(mean, scale, shape=1):
@@ -101,25 +101,25 @@ def getrandomfunc(randomtype=0, seed=-1):
         return uniform
     elif randomtype == 4:
         def poisson(mean, scale, shape=1):
-            return np.random.poisson((mean+0.5) * 100, shape) / 100 - 0.5
+            return np.random.poisson(max(0,(mean+0.5) * 100), shape) / 100 - 0.5
         return poisson
     elif randomtype == 5:
         def rayleigh(mean, scale, shape=1):
             rayleighCoef = np.sqrt(2 / np.pi)
             modevalue = rayleighCoef * (mean+0.5) * 100
-            return np.random.rayleigh(modevalue, shape) / 100 - 0.5
+            return np.random.rayleigh(max(0, modevalue), shape) / 100 - 0.5
         return rayleigh
     elif randomtype == 6:
         def normal(mean, scale, shape=1):
-            return np.random.normal(mean * 100, scale, shape) / 100
+            return np.random.normal(mean * 100, max(0.1, scale), shape) / 100
         return normal
     elif randomtype == 7:
         def laplace(mean, scale, shape=1):
-            return np.random.laplace(mean * 100, scale, shape) / 100
+            return np.random.laplace(mean * 100, max(0.1, scale), shape) / 100
         return laplace
 
     def gamma(mean, scale, shape=1):
-        return np.random.gamma((mean+0.5) * 100 / scale, scale, shape) / 100 - 0.5
+        return np.random.gamma(max(0.1, (mean+0.5) * 100 / scale), max(0.1, scale), shape) / 100 - 0.5
     return gamma
 
 
@@ -128,13 +128,14 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
     xx, yy, zz, xmin, xmax, ymin, ymax, zmin, zmax, points = initheightmap(sizex, sizey, sizez, xx, yy, zz)
     randomfunc = getrandomfunc(int(randomtype), seed)
 
-    freqx = freq*(1+randomfunc(0., scale)+randomfunc(0., scale))
-    freqy = freq*(1+randomfunc(0., scale)+randomfunc(0., scale))
-    freqz = freq*(1+randomfunc(0., scale)+randomfunc(0., scale))
-
+    freqx = freq*(1+randomfunc(1., scale)+randomfunc(1., scale))
+    freqy = freq*(1+randomfunc(1., scale)+randomfunc(1., scale))
+    freqz = freq*(1+randomfunc(1., scale)+randomfunc(1., scale))
+    shiftx = randomfunc(1., scale)+randomfunc(1., scale)
+    shifty = randomfunc(1., scale)+randomfunc(1., scale)
     def func(x, y, z):
-        i = x*freqx
-        j = y*freqy
+        i = shiftx+x*freqx
+        j = shifty+y*freqy
         k = z*freqz+randomfunc(mean, scale) * 0.2
         value = (np.cos(i) + np.sin(j) + np.cos(k) * np.sin(k)) / 3
         if abs(value) < 0.4:

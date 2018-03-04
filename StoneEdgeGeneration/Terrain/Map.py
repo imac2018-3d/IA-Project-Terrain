@@ -1,14 +1,12 @@
-from StoneEdgeGeneration.Asset.assgenutils import *
 from StoneEdgeGeneration.Asset.genericgenetic import *
+import json
 
-from StoneEdgeGeneration.Terrain.HeightMap import *
+from StoneEdgeGeneration.Terrain.HeightMap import getrandomname
 
 import io
 import numpy as np
 
 import copy
-
-import bpy
 
 class MapGenetic(GenericGenetic):
     """Représente un individu de cristal avec son génotype"""
@@ -26,12 +24,12 @@ class MapGenetic(GenericGenetic):
             coefMapTwo : float (0-1),
             smooth : bool,
             octaves : int (1-100),
-            lacunarity : int (1-100),
+            lacunarity : float (0-4),
             freq : float (0-20),
             size : float (-10-20),
             mean : float (-5-5),
             scale : float (-10-10),
-            randomType : int (0-10),
+            randomtype : int (0-10),
             seed : int (0-100)
            ]
            """
@@ -41,12 +39,12 @@ class MapGenetic(GenericGenetic):
             'coefMapTwo' : random.random(),
             'smooth' : int(random.random()*2) % 2 == 0,
             'octaves' : 1 + int(random.random() * 99),
-            'lacunarity' : 1 + int(random.random() * 99),
+            'lacunarity' : random.random() * 4,
             'freq' : random.random() * 20,
-            'size' : -10 + random.random() * 30,
-            'mean' : -5 + random.random() * 10,
+            'size' : -3 + random.random() * 10,
+            'mean' : -3 + random.random() * 10,
             'scale' : -10 + random.random() * 20,
-            'randomType' : int(random.random()*10),
+            'randomtype' : int(random.random()*10),
             'seed' : int(random.random()*100)
         }
 
@@ -65,7 +63,7 @@ class MapGenetic(GenericGenetic):
         buf.write("\n\tsize:" + str(self.genotype['size']))
         buf.write("\n\tmean:" + str(self.genotype['mean']))
         buf.write("\n\tscale:" + str(self.genotype['scale']))
-        buf.write("\n\trandomType:" + str(getrandomname(self.genotype['randomType'])))
+        buf.write("\n\trandomtype:" + str(getrandomname(self.genotype['randomtype'])))
         buf.write("\n\tseed:" + str(self.genotype['seed']))
         buf.write("\n}\n")
         buf.write("- End genotype -")
@@ -74,23 +72,36 @@ class MapGenetic(GenericGenetic):
         buf.close()
         return ret
 
-    def compute_individual(self, location):
-        """Génère une map"""
+    def process_individual_data(self):
+        return json.dumps({"genotype": self.genotype})
+
+    @staticmethod
+    def camera_position():
+        return (-15, -15, 12)
+
+    @staticmethod
+    def net_compute_individual(location, data):
+        return \
+            "from StoneEdgeGeneration.Terrain.Map import MapGenetic\n" \
+            "MapGenetic.compute_individual((" + str(location[0]) + "," + str(location[1]) + "," + str(
+                location[0]) + "),'" + data + "')"
+
+    @staticmethod
+    def compute_individual(location, data):
+        import bpy
+        from StoneEdgeGeneration.Terrain.HeightMap import heightmap3
+        from StoneEdgeGeneration import bpyutils
+
+        values = json.loads(data)
+        genotype = values['genotype']
 
         bpy.context.scene.cursor_location = [0, 0, 0]
 
-        if self.generated is not None:  # on supprime les anciens submaps s'il y en avait
-            print("re-compute " + self.generated)
-            bpydeselect()
-            bpy.data.objects[self.generated].select = True
-            bpy.context.object.location = (0, 0, 0)
-        else:  # ou on créée un nouveau container s'il n'y en a pas
-            bpy.ops.mesh.primitive_plane_add(radius=10)
-            bpy.context.object.name = "Map" + '%03d' % GenericGenetic.bobject_unique_id()
-            self.generated = bpy.context.object.name
-            print("compute " + self.generated)
+        bpy.ops.mesh.primitive_plane_add(radius=10)
+        bpy.context.object.name = 'Crystal' + '%03d' % + GenericGenetic.bobject_unique_id()
+        print("\ncompute " + bpy.context.object.name)
 
-        obj = bpy.data.objects[self.generated]
+        obj = bpy.context.object
         mesh = obj.data
 
         bpy.ops.object.mode_set(mode='OBJECT')
@@ -98,7 +109,7 @@ class MapGenetic(GenericGenetic):
         obj.select = True
         bpy.ops.object.mode_set(mode='EDIT')
         bpy.ops.mesh.dissolve_limited(angle_limit=0.8)
-        count = (self.genotype['vertcount'] / len(mesh.vertices) - 1)
+        count = (genotype['vertcount'] / len(mesh.vertices) - 1)
         if count >= 0:
             bpy.ops.mesh.subdivide(number_cuts=count)
         bpy.ops.mesh.normals_make_consistent()
@@ -110,19 +121,19 @@ class MapGenetic(GenericGenetic):
             originalVertices[1, i] = mesh.vertices[i].normal
         map = heightmap3(100, 100, 5, originalVertices[0, :, 0], originalVertices[0, :, 1],
                         originalVertices[0, :, 2],
-                        coefMap1=self.genotype['coefMap1'], coefMap2=self.genotype['coefMap2'],
-                        smooth=self.genotype['smooth'], octaves=self.genotype['octaves'], lacunarity=self.genotype['lacunarity'],
-                        freq=self.genotype['freq'], freq2=self.genotype['freq'], mean=self.genotype['mean'], scale=self.genotype['scale'],
-                        randomtype=self.genotype['randomtype'], seed=self.genotype['seed'])
+                        coefMap1=genotype['coefMapOne'], coefMap2=genotype['coefMapTwo'],
+                        smooth=genotype['smooth'], octaves=genotype['octaves'], lacunarity=genotype['lacunarity'],
+                        freq=genotype['freq'], freq2=genotype['freq'], mean=genotype['mean'], scale=genotype['scale'],
+                        randomtype=genotype['randomtype'], seed=genotype['seed'])
         for i in range(0, len(mesh.vertices)):
             vertice = mesh.vertices[i]
-            vertice.co = originalVertices[0, i] + originalVertices[1, i] * map[i] * self.genotype['size']
+            vertice.co = originalVertices[0, i] + originalVertices[1, i] * map[i] * genotype['size']
 
-        if self.genotype['smooth']:
+        if genotype['smooth']:
             bpy.ops.object.mode_set(mode='EDIT')
             bpy.ops.mesh.vertices_smooth(factor=0.5, repeat=1)
             bpy.ops.object.mode_set(mode='OBJECT')
-        bpydeselect()
+        bpyutils.bpydeselect()
 
 # Genotype mutation ----------------------------------------------------------------------------------------------------
 
@@ -162,21 +173,21 @@ class MapGenetic(GenericGenetic):
 
         rand = random.random() * 100
         if rand > chance:
-            self.genotype['lacunarity'] = max(1, min(100, int(self.genotype['lacunarity'] + -10 + random.random()*20)))
+            self.genotype['lacunarity'] = max(1, min(100, self.genotype['lacunarity'] + -1 + random.random()*2))
             chance = chance + 10
         else:
             chance = chance - 5
 
         rand = random.random() * 100
         if rand > chance:
-            self.genotype['freq'] = max(0.1, min(20, self.genotype['freq'] + -5 + random.random()*10))
+            self.genotype['freq'] = max(0.1, min(20, self.genotype['freq'] + -2 + random.random()*4))
             chance = chance + 10
         else:
             chance = chance - 5
 
         rand = random.random() * 100
         if rand > chance:
-            self.genotype['size'] = max(0.1, min(20, self.genotype['size'] + -5 + random.random()*10))
+            self.genotype['size'] = max(-3, min(10, self.genotype['size'] + -2 + random.random()*4))
             chance = chance + 10
         else:
             chance = chance - 5
@@ -235,7 +246,7 @@ class MapGenetic(GenericGenetic):
             'size': size,
             'mean': mean,
             'scale': scale,
-            'randomType': geno1['randomType'] if random.randint() % 2 == 0 else geno2['randomType'],
+            'randomtype': geno1['randomtype'] if random.randint() % 2 == 0 else geno2['randomtype'],
             'seed': geno1['seed'] if random.randint() % 2 == 0 else geno2['seed']
         })
         return MapGenetic(child)
@@ -272,222 +283,11 @@ class MapGenetic(GenericGenetic):
     def __del__(self):
         """Quand le génotype est suprimmé, on vire aussi son phénotype s'il existe."""
         if self.generated is not None:
-            bpydeselect()
+            import bpy
+            from StoneEdgeGeneration import bpyutils
+            bpyutils.bpydeselect()
             for child in bpy.data.objects[self.generated].children:
                 child.select = True
             bpy.ops.object.delete()
             bpy.data.objects[self.generated].select = True
             bpy.ops.object.delete()
-
-
-# ======================================================================================================================
-# TOOLS
-# ======================================================================================================================
-
-# ======================================================================================================================
-# GESTION DU map MUTATE MODAL OPERATOR
-# ======================================================================================================================
-
-
-class MapMutateModalOperator(bpy.types.Operator):
-    """Move an object with the mouse, example"""
-    bl_idname = "object.map_mutate_modal_operator"
-    bl_label = "map Mutate Modal Operator"
-
-    def __init__(self):
-        self.genotype = None
-
-    def modal(self, context, event):
-
-        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
-            self.genotype.mutate_genotype()
-            self.genotype.compute_individual((0, 0, 0))
-            return {'RUNNING_MODAL'}
-
-        elif event.type in {'RIGHTMOUSE', 'ESC'}:
-            bpy.types.SpaceView3D.draw_handler_remove(self._handle, 'WINDOW')
-            return {'CANCELLED'}
-
-        return {'RUNNING_MODAL'}
-
-    def invoke(self, context, event):
-
-        args = (context,)
-        self._handle = bpy.types.SpaceView3D.draw_handler_add(self.draw_callback_text, args, 'WINDOW', 'POST_PIXEL')
-        ensure_delete_all()
-        self.genotype = MapGenetic()
-        self.genotype.compute_individual((0, 0, 0))
-
-        context.window_manager.modal_handler_add(self)
-        return {'RUNNING_MODAL'}
-
-
-# ======================================================================================================================
-# GESTION DU map GENERATE MODAL OPERATOR
-# ======================================================================================================================
-
-
-class MapGenerateModalOperator(bpy.types.Operator):
-    """Move an object with the mouse, example"""
-    bl_idname = "object.map_generate_modal_operator"
-    bl_label = "map Generate Modal Operator"
-
-    def __init__(self):
-        self.genotype = None
-
-    def modal(self, context, event):
-
-        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
-            ensure_delete_all()
-            self.genotype = MapGenetic()
-            self.genotype.compute_individual((0, 0, 0))
-            return {'RUNNING_MODAL'}
-
-        elif event.type in {'RIGHTMOUSE', 'ESC'}:
-            bpy.types.SpaceView3D.draw_handler_remove(self._handle, 'WINDOW')
-            return {'CANCELLED'}
-
-        return {'RUNNING_MODAL'}
-
-    def invoke(self, context, event):
-
-        args = (context,)
-        self._handle = bpy.types.SpaceView3D.draw_handler_add(self.draw_callback_text, args, 'WINDOW', 'POST_PIXEL')
-        bpydeleteall()
-        self.genotype = MapGenetic()
-        self.genotype.compute_individual((0, 0, 0))
-
-        context.window_manager.modal_handler_add(self)
-        return {'RUNNING_MODAL'}
-
-# ======================================================================================================================
-# GESTION DU map CROSS MODAL OPERATOR
-# ======================================================================================================================
-
-
-class MapCrossModalOperator(bpy.types.Operator):
-    """Move an object with the mouse, example"""
-    bl_idname = "object.map_cross_modal_operator"
-    bl_label = "map Cross Modal Operator"
-
-    def __init__(self):
-        self.genotype1 = None
-        self.genotype2 = None
-        self.genotypeChildren = None
-
-    def modal(self, context, event):
-
-        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
-            ensure_delete_all()
-            self.genotype1 = MapGenetic()
-            self.genotype2 = MapGenetic()
-            self.genotypeChildren = MapGenetic.cross_genotypes(self.genotype1.genotype, self.genotype2.genotype)
-            self.genotype1.compute_individual((-8, 0, 0))
-            self.genotype2.compute_individual((8, 0, 0))
-            for i, g in enumerate(self.genotypeChildren):
-                g.compute_individual((0, -5 + 5 * i, 0))
-            return {'RUNNING_MODAL'}
-
-        elif event.type in {'RIGHTMOUSE', 'ESC'}:
-            bpy.types.SpaceView3D.draw_handler_remove(self._handle, 'WINDOW')
-            return {'CANCELLED'}
-
-        return {'RUNNING_MODAL'}
-
-    def invoke(self, context, event):
-
-        args = (context,)
-        self._handle = bpy.types.SpaceView3D.draw_handler_add(self.draw_callback_text, args, 'WINDOW', 'POST_PIXEL')
-        ensure_delete_all()
-        self.genotype1 = MapGenetic()
-        self.genotype2 = MapGenetic()
-        self.genotypeChildren = MapGenetic.cross_genotypes(self.genotype1.genotype, self.genotype2.genotype)
-        self.genotype1.compute_individual((-8, 0, 0))
-        self.genotype2.compute_individual((8, 0, 0))
-        for i, g in enumerate(self.genotypeChildren):
-            g.compute_individual((0, -5 + 5 * i, 0))
-
-        context.window_manager.modal_handler_add(self)
-        return {'RUNNING_MODAL'}
-
-# ======================================================================================================================
-# GESTION DU map GENERATIONAL MODAL
-# ======================================================================================================================
-
-
-class MapGenerationalModalOperator(bpy.types.Operator):
-    """Move an object with the mouse, example"""
-    bl_idname = "object.map_generational_modal_operator"
-    bl_label = "Map Generational Modal Operator"
-
-    def __init__(self):
-        return
-
-    def modal(self, context, event):
-
-        if event.type == 'LEFTMOUSE' and event.value == 'PRESS':
-
-            self.generator.next_generation()
-            self.generator.genotypes[2].fitness = 0.8
-            self.generator.genotypes[4].fitness = 0.8
-            self.generator.genotypes[8].fitness = 0.8
-            self.generator.genotypes[0].fitness = 0.8
-            print("")
-            print(repr(self.generator))
-
-            return {'RUNNING_MODAL'}
-
-        elif event.type in {'RIGHTMOUSE', 'ESC'}:
-            bpy.types.SpaceView3D.draw_handler_remove(self._handle, 'WINDOW')
-            return {'CANCELLED'}
-
-        return {'RUNNING_MODAL'}
-
-    def invoke(self, context, event):
-
-        args = (context,)
-        self._handle = bpy.types.SpaceView3D.draw_handler_add(self.draw_callback_text, args, 'WINDOW', 'POST_PIXEL')
-        ensure_delete_all()
-
-        self.generator = AssetGeneticsController(
-            genetic_class=MapGenetic,
-            max_genotypes=9,
-            selection_type="number",
-            selection_type_param=4,
-            show_mode='all'
-        )
-
-        self.generator.genotypes[2].fitness = 0.8
-        self.generator.genotypes[4].fitness = 0.8
-        self.generator.genotypes[8].fitness = 0.8
-        self.generator.genotypes[0].fitness = 0.8
-
-        print(repr(self.generator))
-
-        context.window_manager.modal_handler_add(self)
-        return {'RUNNING_MODAL'}
-
-# ======================================================================================================================
-# REGISTER MODALS
-# ======================================================================================================================
-
-
-def register():
-    bpy.utils.register_class(MapMutateModalOperator)
-    bpy.utils.register_class(MapGenerateModalOperator)
-    bpy.utils.register_class(MapCrossModalOperator)
-    bpy.utils.register_class(MapGenerationalModalOperator)
-
-
-def unregister():
-    bpy.utils.unregister_class(MapMutateModalOperator)
-    bpy.utils.unregister_class(MapGenerateModalOperator)
-    bpy.utils.unregister_class(MapCrossModalOperator)
-    bpy.utils.unregister_class(MapGenerationalModalOperator)
-
-if __name__ == "__main__":
-    register()
-
-    bpy.ops.object.map_generational_modal_operator('INVOKE_DEFAULT')
-
-    #unregister()
