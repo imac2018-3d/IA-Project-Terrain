@@ -204,14 +204,14 @@ class BaseWindow(QtWidgets.QWidget):
 				"print(utils.getImagePath('" + str(individual) + "'))\n"
 				"client.send(utils.getImagePath('" + str(individual) + "'))\n"
 			)
-			imgpath = Communication.receivedata(None)
+			imgpath = Communication.receivedata(30)
 			Communication.sendcommand(
 				"import StoneEdgeGeneration.bpyutils as bpyutils\n"
 				"bpyutils.saveImage('" + imgpath + "', "
 					"("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
 				"client.send(0)\n"
 			)
-			Communication.receivedata(None)
+			Communication.receivedata(30)
 			individual.setImage(imgpath)
 			self.addIndividual(individual)
 

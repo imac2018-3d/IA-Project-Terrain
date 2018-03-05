@@ -1,4 +1,5 @@
 import execnet
+from importlib import import_module, reload
 
 class Communication:
 	channel = None

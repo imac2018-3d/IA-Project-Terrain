@@ -6,8 +6,10 @@ def getBasePath():
 
 def saveImage(name, camerapos=(-5,-5,5)):
 	from StoneEdgeGeneration.utils import getImagePath
-	bpy.ops.object.lamp_add(type='POINT', location=(5,5,5))
+	bpy.ops.object.lamp_add(type='POINT', location=(camerapos[0]-1,camerapos[1]-1,camerapos[2]+5))
 	light = bpy.context.object
+	light.data.energy = 2.5
+	light.data.distance = 40
 	bpy.ops.object.camera_add(view_align=True, location=camerapos, rotation=(math.pi/3,0,-math.pi/4))
 	bpy.context.scene.camera = bpy.context.object
 	if name[-4:] == ".png":
