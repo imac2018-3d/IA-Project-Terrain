@@ -2,41 +2,22 @@ if [ $# -eq 0 ]
 	then
 		echo "Use default blender path"
 		blender_path="/c/Program\ Files/Blender\\ Foundation/Blender/"
-		pip="pip"
-		virtualenv="virtualenv"
 	else
 		blender_path=$1
 fi
 root=$PWD
-python_path="${blender_path}/2.79/python/bin"
-if [ $# -eq 1 ]
-	then
-		pip="pip"
-		virtualenv="virtualenv"
-	elif [ $2 == "true" ]
-	then
-		pip="${python_path}/python -m pip"
-		virtualenv="${python_path}/python -m virtualenv"
-	else
-		pip="pip"
-		virtualenv="virtualenv"
-fi
+python_blender="${blender_path}/2.79/python/bin/python"
+python="python"
 
-echo "Python executable: ${python_path}/python"
 echo "change directory to StoneEdgeGeneration"
-eval "${pip} install virtualenv"
+cd StoneEdgeGeneration
 
-if [ ! -d "virtualenv/Lib" ]; then
-  eval "${virtualenv} virtualenv"
+echo "Python executable: ${python} - ${python_blender}"
 
-fi
-echo "change directory to virtualenv"
-cd virtualenv
-source Scripts/activate
-
-eval "${pip} install -r requirements.txt"
+eval "${python} -m pip install -r requirements-client.txt"
+eval "${python_blender} -m pip install -r requirements-server.txt"
 
 echo "change directory to ${root}"
 cd $root
-eval "${blender_path}/blender main.blend"
+eval "${blender_path}/blender main.blend --python StoneEdgeGeneration/Communication/process_server.py"
  

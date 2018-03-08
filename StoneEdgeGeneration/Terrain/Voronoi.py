@@ -23,9 +23,13 @@ class RegionType(Enum):
 	ROCK = 9
 
 
-def array2PIL(mode, arr, size):
-	arr = np.asarray(arr.reshape(arr.shape[0] * arr.shape[1], arr.shape[2]), np.uint8)
-	return Image.frombuffer(mode, size, arr, 'raw', mode, 0, 1)
+def array2RGB(arr, size):
+	arr = np.asarray(arr.reshape(arr.shape[0] * arr.shape[1], -1), np.uint8)
+	return Image.frombuffer('RGB', size, arr, 'raw', 'RGB', 0, 1)
+
+def array2L(arr, size):
+	arr = np.asarray(arr.reshape(arr.shape[0] * arr.shape[1], -1), np.uint8)
+	return Image.frombuffer('L', size, arr, 'raw', 'L', 0, 1)
 
 
 class VoronoiMap:
@@ -186,11 +190,11 @@ class VoronoiMap:
 				return
 
 			if self.type == RegionType.WATER:
-				color = 50
+				color = 30
 			elif self.type.value >= RegionType.LAND.value:
-				color = int(min(255.0, 70.0 + 150.0 * self.height / maxheight))
+				color = int(min(255.0, 50.0 + 230.0 * self.height / maxheight))
 			elif self.type == RegionType.SEA:
-				color = 10
+				color = 15
 			else:
 				color = 0
 			points = []
@@ -374,7 +378,7 @@ class VoronoiMap:
 		image = np.minimum(np.asarray(image) + (np.random.random((self.sizex, self.sizey))[:,:,None] * [50,50,50]),
 						   255)
 		image = filters.median_filter(image, size=(5,5,1))
-		image = array2PIL('RGB', image, size)
+		image = array2RGB(image, size)
 		#image.filter(ImageFilter.GaussianBlur)
 		return image
 
@@ -393,6 +397,10 @@ class VoronoiMap:
 			maxheight = max(maxheight, region.height)
 		for region in self.regions:
 			region.drawheight(draw, self.voronoimap, image.size, maxheight)
+		size = image.size
+		image = np.maximum(np.asarray(image) - (np.random.random((self.sizex, self.sizey))[:,:] * 50), 0)
+		image = filters.gaussian_filter(image, sigma=(3,3))
+		image = array2L(image, size)
 		return image
 
 	def tomoisturemap(self):
