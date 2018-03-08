@@ -1,7 +1,3 @@
-from importlib import reload
-from StoneEdgeGeneration import utils
-reload(utils)
-
 class Individual:
 	def __init__(self, id, weight=50, type="Asset"):
 		self.id = id
@@ -9,8 +5,15 @@ class Individual:
 		self.type = type
 
 	def createImage(self):
-		self.image = self.type + str(self.id)
-		utils.saveImage(self.image)
+		from StoneEdgeGeneration import bpyutils
+		self.image = str(self)
+		bpyutils.saveImage(self.image)
+
+	def setImage(self, imagename):
+		self.image = imagename
 
 	def setWeight(self, weight):
 		self.weight = weight
+
+	def __str__(self):
+		return self.type + str(self.id)

@@ -1,21 +1,26 @@
-import bpy, sys, os
+import os
 
-BASE_PATH = os.path.dirname(bpy.data.filepath)
+def _defaultdirpath(dirpath):
+    if len(dirpath) == 0:
+        if 'basepath' in globals():
+            dirpath = basepath
+        else:
+            from StoneEdgeGeneration.bpyutils import getBasePath
+            dirpath = getBasePath()
+    return dirpath
 
-def saveImage(name):
-    bpy.data.scenes['Scene'].render.filepath = getImagePath(name)
-    bpy.ops.render.render( write_still=True )
-
-def getImagePath(imageName=""):
-    folder = BASE_PATH + "/StoneEdgeGeneration/Resources/Images/"
+def getImagePath(imageName="", dirpath=""):
+    dirpath=_defaultdirpath(dirpath)
+    folder = dirpath + "/StoneEdgeGeneration/Resources/Images/"
     if imageName:
-        return os.path.normpath(os.path.join(folder, imageName + ".png"))
+        return os.path.normpath(os.path.join(folder, imageName + ".png")).replace("\\","/")
     else:
-        return folder
+        return folder.replace("\\","/")
 
-def getModelPath(modelName=""):
-    folder = BASE_PATH + "/StoneEdgeGeneration/Resources/Images/"
+def getModelPath(modelName="", dirpath=""):
+    dirpath = _defaultdirpath(dirpath)
+    folder = dirpath + "/StoneEdgeGeneration/Resources/Images/"
     if modelName:
-        return os.path.normpath(os.path.join(folder, modelName + ".png"))
+        return os.path.normpath(os.path.join(folder, modelName + ".png")).replace("\\","/")
     else:
-        return folder
+        return folder.replace("\\","/")

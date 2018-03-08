@@ -104,6 +104,8 @@ class OBJECT_OT_GenerateButton(bpy.types.Operator):
         mat = bpy.context.object.active_material
         slot = mat.texture_slots.add()
         slot.texture = tex
+        mesh.materials.append(mat)
+
         try:
             img = bpy.data.images.load(name)
         except:
