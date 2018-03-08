@@ -24,16 +24,18 @@ fi
 
 echo "Python executable: ${python_path}/python"
 echo "change directory to StoneEdgeGeneration"
-cd StoneEdgeGeneration
 eval "${pip} install virtualenv"
 
 if [ ! -d "virtualenv/Lib" ]; then
   eval "${virtualenv} virtualenv"
+
 fi
 echo "change directory to virtualenv"
 cd virtualenv
 source Scripts/activate
+
 eval "${pip} install -r requirements.txt"
+
 echo "change directory to ${root}"
 cd $root
 eval "${blender_path}/blender main.blend"
