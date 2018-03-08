@@ -1,9 +1,11 @@
 import matplotlib
 import numpy as np
 import noise
-from PIL import Image, ImageDraw
+import random
+from PIL import Image, ImageDraw, ImageFilter
 from scipy.spatial import voronoi_plot_2d
 from scipy.spatial import Voronoi
+from scipy.ndimage import filters
 from enum import Enum
 
 class RegionType(Enum):
@@ -18,6 +20,12 @@ class RegionType(Enum):
 	FOREST = 6
 	JUNGLE = 7
 	SAND = 8
+	ROCK = 9
+
+
+def array2PIL(mode, arr, size):
+	arr = np.asarray(arr.reshape(arr.shape[0] * arr.shape[1], arr.shape[2]), np.uint8)
+	return Image.frombuffer(mode, size, arr, 'raw', mode, 0, 1)
 
 
 class VoronoiMap:
@@ -112,13 +120,17 @@ class VoronoiMap:
 						self.type = RegionType.JUNGLE
 					elif self.moisture > 2:
 						self.type = RegionType.FOREST
-					else:
+					elif self.moisture > 0:
 						self.type = RegionType.GRASS
+					else:
+						self.type = RegionType.ROCK
 				else:
-					if self.moisture > 3:
+					if self.moisture > 4:
 						self.type = RegionType.SAND
-					else:
+					elif self.moisture > 2:
 						self.type = RegionType.GRASS
+					else:
+						self.type = RegionType.ROCK
 
 		def draw(self, draw, map, scale=(1, 1), maxheight=10):
 			if self.point is None or self.type == RegionType.END:
@@ -129,39 +141,45 @@ class VoronoiMap:
 				r, g, b = 25, 125, 255
 			elif self.type.value >= RegionType.LAND.value:
 				heightcoef = (self.height+1) / maxheight
-				r = 120 * 1/heightcoef
-				g = 80 * 1/heightcoef
-				b = 30 * 1/heightcoef
+				r = 140 * 1/heightcoef
+				g = 120 * 1/heightcoef
+				b = 50 * 1/heightcoef
 				if self.type == RegionType.BARE:
-					b = (r+g+b)/6
-					g = (r+g+b)/5
-					r = (r+g+b)/4
-				if self.type == RegionType.SNOW:
+					r = (r + g + b) / 3 + (-10 + random.random() * 20)
+					g = (r + g + b) / 3
+					b = (r + g + b) / 4
+				elif self.type == RegionType.ROCK:
+					r = (r + g + b) / 4 + (-10 + random.random() * 20)
+					g = (r + g + b) / 5 + (-10 + random.random() * 20)
+					b = (r + g + b) / 5 + (-10 + random.random() * 20)
+				elif self.type == RegionType.SNOW:
 					r = r + 200 * heightcoef
 					g = g + 200 * heightcoef
 					b = b + 200 * heightcoef
 				elif self.type == RegionType.GRASS:
-					g = g + 130
-					b = b + 20
+					r = r - 150 + (-20 + random.random() * 20)
+					g = g + 70 + (-10 + random.random() * 20)
+					b = b + 20 + (random.random() * 20)
 				elif self.type == RegionType.FOREST:
 					r = r - 50
-					g = g + 10
-					b = b + 10
+					g = g + 10 + (-10 + random.random() * 20)
+					b = b + 10 + (-10 + random.random() * 20)
 				elif self.type == RegionType.JUNGLE:
 					r = r - 200
-					g = g - 20
+					g = g - 20 + (-10 + random.random() * 20)
 					b = b - 10
 				elif self.type == RegionType.SAND:
-					r = r + 20
-					g = g + 80
-					b = b + 120
+					b = (r + g + b) / 4 + (-10 + random.random() * 40)
+					r = (r + g + b) / 3 + (-10 + random.random() * 40)
+					g = (r + g + b) / 3 + (-10 + random.random() * 40)
 			elif self.type == RegionType.SEA:
 				r, g, b = 10, 12, 50
 			color = (max(0, min(255,int(r))), min(255,int(g)), min(255,int(b)))
-			points = []
-			for point in (map.vertices[self.vertices_index] * scale):
-				points.append((point[0], 1.0*scale[1] - point[1]))
-			draw.polygon(points[:], fill=color)
+			if len(map.vertices[self.vertices_index]):
+				points = []
+				for p in (map.vertices[self.vertices_index] * scale):
+					points.append((p[0], scale[1] - p[1]))
+				draw.polygon(points[:], fill=color)
 
 		def drawheight(self, draw, map, scale=(1, 1), maxheight=10):
 			if self.point is None or self.type == RegionType.END:
@@ -170,14 +188,14 @@ class VoronoiMap:
 			if self.type == RegionType.WATER:
 				color = 50
 			elif self.type.value >= RegionType.LAND.value:
-				color = int(min(255.0, max(100.0, 255.0 * self.height / maxheight)))
+				color = int(min(255.0, 70.0 + 150.0 * self.height / maxheight))
 			elif self.type == RegionType.SEA:
 				color = 10
 			else:
 				color = 0
 			points = []
 			for point in (map.vertices[self.vertices_index] * scale):
-				points.append((point[0], 1.0*scale[1] - point[1]))
+				points.append((point[0], scale[1] - point[1]))
 			draw.polygon(points[:], fill=color)
 
 		def drawmoisture(self, draw, map, scale=(1, 1)):
@@ -241,6 +259,7 @@ class VoronoiMap:
 			if self.regions[i] is None:
 				self.regions[i] = VoronoiMap.Region(i, self.voronoimap.regions[i], None, -1)
 
+		self.noisylines()
 		self.makeislands(landthreshold, searelativethreshold, radialbias, heightfreq, heightoctaves, heightpersistance)
 		self.checklake()
 		self.setheight(heightstep)
@@ -264,6 +283,10 @@ class VoronoiMap:
 			points = np.unique(points, axis=0)
 			self.voronoimap = Voronoi(points)
 			level = level - 1
+
+	def noisylines(self):
+		for region in self.regions:
+			pass
 
 	def makeislands(self, landthreshold=0, searelativethreshold=0.1, radialbias=1.0, freq=5, octaves=1, persistance=1.0):
 		nextregions = set()
@@ -347,6 +370,12 @@ class VoronoiMap:
 			maxheight = max(maxheight, region.height)
 		for region in self.regions:
 			region.draw(draw, self.voronoimap, image.size, maxheight)
+		size = image.size
+		image = np.minimum(np.asarray(image) + (np.random.random((self.sizex, self.sizey))[:,:,None] * [50,50,50]),
+						   255)
+		image = filters.median_filter(image, size=(5,5,1))
+		image = array2PIL('RGB', image, size)
+		#image.filter(ImageFilter.GaussianBlur)
 		return image
 
 	def togrid(self):
@@ -384,7 +413,7 @@ def main():
 	#voronoi_plot_2d(map.voronoimap)
 	#plt.show()
 	#plt.pause(1)
-	map = VoronoiMap(512,512,xx,yy,500,5)
+	map = VoronoiMap(512,512,xx,yy,600,5,moisturestart=2)
 	voronoi_plot_2d(map.voronoimap)
 	plt.show()
 	plt.pause(1)

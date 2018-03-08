@@ -50,7 +50,7 @@ class MapGenetic(GenericGenetic):
 		   ]
 		   """
 		return {
-			'vertcount' : 300 + int(random.random()*500),
+			'vertcount' : 100 + int(random.random()*500),
 			'coef_map_one' : random.random(),
 			'coef_map_two' : random.random(),
 			'height_smooth' : int(random.random()*2) % 2 == 0,
@@ -71,7 +71,7 @@ class MapGenetic(GenericGenetic):
 			'voro_height_octaves': 1 + int(random.random() * 49),
 			'voro_height_persistance': 0.5+random.random() * 2.5,
 			'voro_height_step': 0.25 + random.random() * 2.75,
-			'voro_moisture_start': 3.0 + random.random() * 10,
+			'voro_moisture_start': random.random() * 15,
 			'voro_moisture_step': 0.25 + random.random() * 2.75,
 			'voro_moisture_freq': random.random() * 20,
 			'voro_moisture_octaves': 1 + int(random.random() * 49),
@@ -208,7 +208,8 @@ class MapGenetic(GenericGenetic):
 						 randomtype=genotype['randomtype'], seed=genotype['seed'])
 		for i in range(0, len(mesh.vertices)):
 			vertice = mesh.vertices[i]
-			vertice.co = originalVertices[0, i] + originalVertices[1, i] * map[i] * genotype['height_size'] * originalVertices[2, i, 2]
+			vertice.co = originalVertices[0, i] +\
+						 originalVertices[1, i] * (genotype['height_size'] * (0.3+0.5*map[i]) * originalVertices[2, i, 2])
 		end = time.time()
 
 		print("make height map : ", end - start, "s")
@@ -244,7 +245,7 @@ class MapGenetic(GenericGenetic):
 		chance2 = 80
 		rand = random.random() * 100
 		if rand > chance1:
-			self.genotype['vertcount'] = max(200, min(900, self.genotype['vertcount'] + -50 + random.random() * 100))
+			self.genotype['vertcount'] = max(50, min(900, self.genotype['vertcount'] + -50 + random.random() * 100))
 			chance1 = chance1 + 10
 		else:
 			chance1 = chance1 - 5
@@ -363,7 +364,7 @@ class MapGenetic(GenericGenetic):
 
 		rand = random.random() * 100
 		if rand > chance2:
-			self.genotype['voro_moisture_start'] = max(3, min(13, self.genotype['voro_moisture_start'] + -1 + random.random()*2))
+			self.genotype['voro_moisture_start'] = max(-1, min(13, self.genotype['voro_moisture_start'] + -1 + random.random()*2))
 			chance2 = chance2 + 10
 		else:
 			chance2 = chance2 - 5
