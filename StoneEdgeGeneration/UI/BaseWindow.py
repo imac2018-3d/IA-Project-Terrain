@@ -11,9 +11,6 @@ from StoneEdgeGeneration.UI import Individual, Parameter
 from StoneEdgeGeneration.Asset import genericgenetic
 reload(UI)
 
-def printyolo():
-	Communication.log("yolo")
-
 def makeRadioParameters(options):
 	iterator = iter(options)
 	radioparameter = {next(iterator): True}
@@ -131,7 +128,6 @@ class BaseWindow(QtWidgets.QWidget):
 									  alt_procreation=alt_procreation,
 									  show_mode=show_mode)
 
-
 	def startGeneration(self):
 		try:
 			self.clearResults()
@@ -147,7 +143,6 @@ class BaseWindow(QtWidgets.QWidget):
 		except Exception as e:
 			Communication.exception(e)
 
-
 	def addIndividual(self, individual):
 		self.individuals.append(individual)
 		imageGBox = QtWidgets.QGroupBox()
@@ -162,6 +157,7 @@ class BaseWindow(QtWidgets.QWidget):
 
 		# Image
 		image = QtWidgets.QPushButton()
+		image.pressed.connect(individual.open)
 		image.setIconSize(QtCore.QSize(100, 100))
 		image.setIcon(QtGui.QIcon(individual.image))
 		imageVLayout.addWidget(image)
@@ -197,7 +193,7 @@ class BaseWindow(QtWidgets.QWidget):
 		genetic_class = self.classes[self.class_btn.checkedButton().text()]
 		for i in range(len(self.assetController.genotypes)):
 			genotype = self.assetController.genotypes[i]
-			individual = Individual.Individual(i, type=genetic_class[1])
+			individual = Individual.Individual(i, genotype, type=genetic_class[1])
 			data = genotype.process_individual_data()
 			Communication.sendcommand(
 				"import StoneEdgeGeneration.bpyutils as bpyutils\n"

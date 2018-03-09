@@ -92,3 +92,405 @@ EOFError
 2018-03-08 15:43:49,128 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic4.png
 2018-03-08 15:43:49,706 :: DEBUG :: data: 0
 2018-03-08 15:44:43,753 :: INFO :: End client
+2018-03-09 13:03:10,508 :: INFO :: Start client
+2018-03-09 13:03:10,508 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:03:35,520 :: INFO :: Start client
+2018-03-09 13:03:35,521 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:03:38,757 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 13:03:39,094 :: DEBUG :: data: 0
+2018-03-09 13:03:39,607 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 13:03:39,808 :: DEBUG :: data: 0
+2018-03-09 13:03:39,898 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 13:03:39,997 :: DEBUG :: data: 0
+2018-03-09 13:03:40,156 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 13:03:40,276 :: DEBUG :: data: 0
+2018-03-09 13:03:40,442 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 13:03:40,613 :: DEBUG :: data: 0
+2018-03-09 13:10:44,764 :: INFO :: Start client
+2018-03-09 13:10:44,764 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:10:52,501 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 13:10:52,746 :: DEBUG :: data: 0
+2018-03-09 13:10:52,877 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 139, in startGeneration
+    self.generate()
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 222, in generate
+    self.addIndividual(individual)
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 183, in addIndividual
+    saveBtn.pressed.connect(individual.saveImage)
+AttributeError: 'Individual' object has no attribute 'saveImage'
+2018-03-09 13:11:36,022 :: INFO :: End client
+2018-03-09 13:11:39,106 :: INFO :: Start client
+2018-03-09 13:11:39,106 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:11:42,540 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 13:11:42,685 :: DEBUG :: data: 0
+2018-03-09 13:11:42,964 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 13:11:43,107 :: DEBUG :: data: 0
+2018-03-09 13:11:43,185 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 13:11:43,297 :: DEBUG :: data: 0
+2018-03-09 13:11:43,431 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 13:11:43,561 :: DEBUG :: data: 0
+2018-03-09 13:11:43,655 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 13:11:43,765 :: DEBUG :: data: 0
+2018-03-09 13:12:39,820 :: INFO :: Start client
+2018-03-09 13:12:39,820 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:12:42,120 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 13:12:42,310 :: DEBUG :: data: 0
+2018-03-09 13:16:22,432 :: INFO :: Start client
+2018-03-09 13:16:22,433 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:16:56,768 :: INFO :: Start client
+2018-03-09 13:16:56,768 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 13:17:06,245 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 13:17:06,442 :: DEBUG :: data: 0
+2018-03-09 13:18:09,764 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "<string>", line 418, in from_io
+  File "<string>", line 389, in read
+EOFError: expected 9 bytes, got 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 139, in startGeneration
+    self.generate()
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 213, in generate
+    imgpath = Communication.receivedata(None)
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 31, in receivedata
+    res=Communication.channel.receive(timeout)
+  File "<string>", line 737, in receive
+  File "<string>", line 954, in _thread_receiver
+  File "<string>", line 423, in from_io
+EOFError: couldnt load message header, expected 9 bytes, got 0
+2018-03-09 13:18:09,792 :: INFO :: End client
+2018-03-09 13:19:45,449 :: INFO :: Start client
+2018-03-09 13:19:45,449 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:05:36,857 :: INFO :: Start client
+2018-03-09 16:05:36,858 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:05:41,140 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:05:41,432 :: DEBUG :: data: 0
+2018-03-09 16:09:17,387 :: INFO :: Start client
+2018-03-09 16:09:17,388 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:09:50,889 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "<string>", line 418, in from_io
+  File "<string>", line 389, in read
+EOFError: expected 9 bytes, got 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 139, in startGeneration
+    self.generate()
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 213, in generate
+    imgpath = Communication.receivedata(None)
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 31, in receivedata
+    res=Communication.channel.receive(timeout)
+  File "<string>", line 737, in receive
+  File "<string>", line 954, in _thread_receiver
+  File "<string>", line 423, in from_io
+EOFError: couldnt load message header, expected 9 bytes, got 0
+2018-03-09 16:09:50,909 :: INFO :: End client
+2018-03-09 16:09:57,096 :: INFO :: Start client
+2018-03-09 16:09:57,096 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:09:59,629 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:09:59,824 :: DEBUG :: data: 0
+2018-03-09 16:10:34,440 :: INFO :: Start client
+2018-03-09 16:10:34,440 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:10:37,417 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:10:37,530 :: DEBUG :: data: 0
+2018-03-09 16:10:37,818 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:10:37,936 :: DEBUG :: data: 0
+2018-03-09 16:10:38,048 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:10:38,145 :: DEBUG :: data: 0
+2018-03-09 16:10:38,290 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:10:38,386 :: DEBUG :: data: 0
+2018-03-09 16:10:38,505 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:10:38,606 :: DEBUG :: data: 0
+2018-03-09 16:11:41,979 :: INFO :: Start client
+2018-03-09 16:11:41,979 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:11:44,720 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:11:44,853 :: DEBUG :: data: 0
+2018-03-09 16:11:45,150 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:11:45,248 :: DEBUG :: data: 0
+2018-03-09 16:11:45,317 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:11:45,484 :: DEBUG :: data: 0
+2018-03-09 16:11:45,548 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:11:45,661 :: DEBUG :: data: 0
+2018-03-09 16:11:45,737 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:11:45,904 :: DEBUG :: data: 0
+2018-03-09 16:11:59,965 :: DEBUG :: CREATE YOLO - Individual
+2018-03-09 16:13:07,659 :: INFO :: End client
+2018-03-09 16:13:08,673 :: INFO :: End client
+2018-03-09 16:13:10,385 :: INFO :: Start client
+2018-03-09 16:13:10,385 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:13:14,741 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:13:14,913 :: DEBUG :: data: 0
+2018-03-09 16:13:15,184 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:13:15,283 :: DEBUG :: data: 0
+2018-03-09 16:13:15,326 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:13:15,443 :: DEBUG :: data: 0
+2018-03-09 16:13:15,640 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:13:15,776 :: DEBUG :: data: 0
+2018-03-09 16:13:15,832 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:13:15,923 :: DEBUG :: data: 0
+2018-03-09 16:13:17,000 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:13:36,043 :: INFO :: End client
+2018-03-09 16:13:38,625 :: INFO :: Start client
+2018-03-09 16:13:38,626 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:13:41,606 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:13:41,703 :: DEBUG :: data: 0
+2018-03-09 16:13:41,862 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:13:42,001 :: DEBUG :: data: 0
+2018-03-09 16:13:42,114 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:13:42,221 :: DEBUG :: data: 0
+2018-03-09 16:13:42,307 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:13:42,460 :: DEBUG :: data: 0
+2018-03-09 16:13:42,556 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:13:42,697 :: DEBUG :: data: 0
+2018-03-09 16:13:43,960 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:13:44,103 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:14:03,599 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:14:03,609 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:14:04,298 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:14:04,417 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:14:04,453 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:14:04,613 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:14:07,999 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:14:08,070 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:15:56,460 :: INFO :: End client
+2018-03-09 16:15:59,586 :: INFO :: Start client
+2018-03-09 16:15:59,586 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:16:01,637 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:16:01,785 :: DEBUG :: data: 0
+2018-03-09 16:16:01,942 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:16:02,091 :: DEBUG :: data: 0
+2018-03-09 16:16:02,184 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:16:02,310 :: DEBUG :: data: 0
+2018-03-09 16:16:02,395 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:16:02,566 :: DEBUG :: data: 0
+2018-03-09 16:16:02,746 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:16:02,900 :: DEBUG :: data: 0
+2018-03-09 16:16:04,723 :: DEBUG :: CREATE MODEL - Individual
+2018-03-09 16:16:04,865 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:18:06,865 :: INFO :: End client
+2018-03-09 16:18:10,973 :: INFO :: Start client
+2018-03-09 16:18:10,974 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:18:12,258 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:18:12,360 :: DEBUG :: data: 0
+2018-03-09 16:18:12,628 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:18:12,732 :: DEBUG :: data: 0
+2018-03-09 16:18:12,840 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:18:12,993 :: DEBUG :: data: 0
+2018-03-09 16:18:13,051 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:18:13,147 :: DEBUG :: data: 0
+2018-03-09 16:18:13,185 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:18:13,315 :: DEBUG :: data: 0
+2018-03-09 16:18:14,426 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:18:26,451 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:18:28,850 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:18:34,333 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:18:37,985 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:23:38,146 :: INFO :: End client
+2018-03-09 16:23:42,489 :: INFO :: Start client
+2018-03-09 16:23:42,489 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:24:01,037 :: INFO :: Start client
+2018-03-09 16:24:01,038 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:24:03,485 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:24:03,602 :: DEBUG :: data: 0
+2018-03-09 16:24:03,761 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:24:03,875 :: DEBUG :: data: 0
+2018-03-09 16:24:03,951 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:24:04,058 :: DEBUG :: data: 0
+2018-03-09 16:24:04,161 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:24:04,328 :: DEBUG :: data: 0
+2018-03-09 16:24:04,530 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:24:04,704 :: DEBUG :: data: 0
+2018-03-09 16:26:08,744 :: INFO :: Start client
+2018-03-09 16:26:08,745 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:26:12,084 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:26:12,241 :: DEBUG :: data: 0
+2018-03-09 16:26:12,504 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:26:12,631 :: DEBUG :: data: 0
+2018-03-09 16:26:12,802 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:26:12,902 :: DEBUG :: data: 0
+2018-03-09 16:26:12,986 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:26:13,086 :: DEBUG :: data: 0
+2018-03-09 16:26:13,208 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:26:13,312 :: DEBUG :: data: 0
+2018-03-09 16:32:10,455 :: INFO :: Start client
+2018-03-09 16:32:10,456 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:32:12,808 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:32:12,910 :: DEBUG :: data: 0
+2018-03-09 16:32:13,027 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 135, in startGeneration
+    self.generate()
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 218, in generate
+    self.addIndividual(individual)
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\UI\BaseWindow.py", line 179, in addIndividual
+    saveBtn.pressed.connect(individual.create)
+AttributeError: 'Individual' object has no attribute 'create'
+2018-03-09 16:32:38,762 :: INFO :: End client
+2018-03-09 16:32:41,809 :: INFO :: Start client
+2018-03-09 16:32:41,810 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 16:32:43,339 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 16:32:43,517 :: DEBUG :: data: 0
+2018-03-09 16:32:43,695 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 16:32:43,802 :: DEBUG :: data: 0
+2018-03-09 16:32:43,943 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 16:32:44,040 :: DEBUG :: data: 0
+2018-03-09 16:32:44,131 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 16:32:44,257 :: DEBUG :: data: 0
+2018-03-09 16:32:44,291 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 16:32:44,503 :: DEBUG :: data: 0
+2018-03-09 16:32:46,885 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 16:32:55,480 :: DEBUG :: Open individual
+2018-03-09 16:33:03,538 :: DEBUG :: Open individual
+2018-03-09 16:33:04,292 :: DEBUG :: Open individual
+2018-03-09 17:01:10,581 :: INFO :: End client
+2018-03-09 17:01:13,813 :: INFO :: Start client
+2018-03-09 17:01:13,813 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 17:01:16,738 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 17:01:16,842 :: DEBUG :: data: 0
+2018-03-09 17:01:17,158 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 17:01:17,285 :: DEBUG :: data: 0
+2018-03-09 17:01:17,350 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 17:01:17,449 :: DEBUG :: data: 0
+2018-03-09 17:01:17,478 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 17:01:17,574 :: DEBUG :: data: 0
+2018-03-09 17:01:17,712 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 17:01:17,856 :: DEBUG :: data: 0
+2018-03-09 17:01:20,189 :: DEBUG :: Open individual
+2018-03-09 17:01:21,949 :: DEBUG :: Open individual
+2018-03-09 17:01:22,849 :: DEBUG :: Open individual
+2018-03-09 17:01:23,555 :: DEBUG :: Open individual
+2018-03-09 17:01:24,540 :: DEBUG :: Open individual
+2018-03-09 17:01:24,646 :: DEBUG :: Open individual
+2018-03-09 17:01:26,509 :: DEBUG :: Open individual
+2018-03-09 17:01:28,647 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 17:02:27,549 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 17:02:31,206 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 17:02:41,162 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 17:02:56,668 :: INFO :: End client
+2018-03-09 17:03:02,506 :: INFO :: Start client
+2018-03-09 17:03:02,506 :: INFO :: Channel:<Channel id=1 open>
+2018-03-09 17:03:04,336 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic0.png
+2018-03-09 17:03:04,438 :: DEBUG :: data: 0
+2018-03-09 17:03:04,637 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic1.png
+2018-03-09 17:03:04,749 :: DEBUG :: data: 0
+2018-03-09 17:03:04,807 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic2.png
+2018-03-09 17:03:04,904 :: DEBUG :: data: 0
+2018-03-09 17:03:04,969 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic3.png
+2018-03-09 17:03:05,172 :: DEBUG :: data: 0
+2018-03-09 17:03:05,240 :: DEBUG :: data: C:/Users/Coralie G/Documents/IMAC_Semestre5/IMAC_IA/Projet/StoneEdgeGeneration/StoneEdgeGeneration/Resources/Images/CrystalGenetic4.png
+2018-03-09 17:03:05,371 :: DEBUG :: data: 0
+2018-03-09 17:03:09,073 :: DEBUG :: Open individual
+2018-03-09 17:03:09,210 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\Coralie G\Documents\IMAC_Semestre5\IMAC_IA\Projet\StoneEdgeGeneration\StoneEdgeGeneration\Communication\Communication.py", line 68, in handlemessage
+    res = execnet.loads(message)
+  File "C:\Users\Coralie G\AppData\Local\Programs\Python\Python35\lib\site-packages\execnet\gateway_base.py", line 1333, in loads
+    io = BytesIO(bytestring)
+TypeError: a bytes-like object is required, not 'int'
+2018-03-09 17:03:34,560 :: DEBUG :: Open individual
+2018-03-09 17:03:35,677 :: DEBUG :: Open individual
+2018-03-09 17:03:45,916 :: DEBUG :: Open individual
+2018-03-09 17:03:47,975 :: DEBUG :: Open individual
+2018-03-09 17:03:54,675 :: DEBUG :: Open individual
+2018-03-09 17:03:59,461 :: DEBUG :: Open individual

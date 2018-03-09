@@ -22,8 +22,7 @@ def saveImage(name, camerapos=(-5,-5,5)):
 
 def saveModel(name):
 	from StoneEdgeGeneration.utils import getModelPath
-	# bpy.ops.export_scene.obj(filepath=getModelPath(name))
-	print("Save model")
+	bpy.ops.export_scene.obj(filepath=getModelPath(name))
 
 def bpydeselect():
 	bpy.ops.object.select_all(action='DESELECT')
