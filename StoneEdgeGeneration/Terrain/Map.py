@@ -33,6 +33,7 @@ class MapGenetic(GenericGenetic):
 			height_scale : float (-0.5-10),
 			randomtype : int (0-10),
 			seed : int (0-100),
+			temperature : int (-5-35)
 			voro_points_count : int (100-300),
 			voro_regular : int (0-5),
 			voro_land_threshold : float (-0.5-0.5),
@@ -62,6 +63,7 @@ class MapGenetic(GenericGenetic):
 			'height_scale' : -0.5 + random.random() * 9.5,
 			'randomtype' : int(random.random()*10),
 			'seed' : int(random.random()*100),
+			'temperature' : int(-5 + random.random()*40),
 			'voro_points_count': 100+int(random.random()*200),
 			'voro_regular': int(random.random()*6),
 			'voro_land_threshold': random.random()-0.5,
@@ -84,8 +86,8 @@ class MapGenetic(GenericGenetic):
 		buf = io.StringIO()
 		buf.write("- Begin genotype -\n")
 		buf.write("{\n\tvertcount:" + str(self.genotype['vertcount']))
-		buf.write("\n\tcoefMapOne:" + str(self.genotype['coefMapOne']))
-		buf.write("\n\tcoefMapTwo:" + str(self.genotype['coefMapTwo']))
+		buf.write("\n\tcoef map one:" + str(self.genotype['coef_map_one']))
+		buf.write("\n\tcoef map two:" + str(self.genotype['coef_map_two']))
 		buf.write("\n\tsmooth:" + str(self.genotype['smooth']))
 		buf.write("\n\toctaves:" + str(self.genotype['octaves']))
 		buf.write("\n\tlacunarity:" + str(self.genotype['lacunarity']))
@@ -95,6 +97,9 @@ class MapGenetic(GenericGenetic):
 		buf.write("\n\tscale:" + str(self.genotype['scale']))
 		buf.write("\n\trandomtype:" + str(getrandomname(self.genotype['randomtype'])))
 		buf.write("\n\tseed:" + str(self.genotype['seed']))
+		buf.write("\n\tvoro land threshold:" + str(self.genotype['voro_land_threshold']))
+		buf.write("\n\tvoro moisture start:" + str(self.genotype['voro_moisture_start']))
+		buf.write("\n\ttemperature:" + str(self.genotype['temperature']))
 		buf.write("\n}\n")
 		buf.write("- End genotype -")
 
@@ -109,7 +114,8 @@ class MapGenetic(GenericGenetic):
 							 heightpersistance=self.genotype['voro_height_persistance'], heightstep=self.genotype['voro_height_step'],
 							 moisturestart=self.genotype['voro_moisture_start'], moisturestep=self.genotype['voro_moisture_step'],
 							 moisturefreq=self.genotype['voro_moisture_freq'], moistureoctaves=self.genotype['voro_moisture_octaves'],
-							 moisturepersistance=self.genotype['voro_moisture_persistance'], seed=self.genotype['seed'])
+							 moisturepersistance=self.genotype['voro_moisture_persistance'], seed=self.genotype['seed'],
+							 temperature=self.genotype['temperature'])
 
 		image = voromap.toimage()
 		with NamedTemporaryFile(suffix=".jpg") as tmp:
@@ -172,7 +178,7 @@ class MapGenetic(GenericGenetic):
 		obj.select = True
 		bpy.ops.object.mode_set(mode='EDIT')
 		bpy.ops.mesh.dissolve_limited(angle_limit=0.8)
-		count = int((genotype['vertcount']+(len(mesh.vertices) - 1)) / len(mesh.vertices))
+		count = int(0.5 * (genotype['vertcount']+(len(mesh.vertices) - 1)) / len(mesh.vertices))
 		if count >= 0:
 			bpy.ops.mesh.subdivide(number_cuts=count)
 		bpy.ops.mesh.normals_make_consistent()
@@ -337,6 +343,13 @@ class MapGenetic(GenericGenetic):
 			chance2 = chance2 - 5
 
 		rand = random.random() * 100
+		if rand > chance2:
+			self.genotype['temperature'] = max(-10, min(40, self.genotype['temperature'] + -2 + random.random()*4))
+			chance2 = chance2 + 10
+		else:
+			chance2 = chance2 - 5
+
+		rand = random.random() * 100
 		if rand > chance1:
 			self.genotype['height_mean'] = max(-0.5, min(10, self.genotype['height_mean'] + -0.5 + random.random()*1))
 			chance1 = chance1 + 10
@@ -428,6 +441,7 @@ class MapGenetic(GenericGenetic):
 		voro_moisture_freq = geno1['voro_moisture_freq'] * 0.5 + geno2['voro_moisture_freq'] * 0.5
 		voro_moisture_octaves = int(geno1['voro_moisture_octaves'] * 0.5 + geno2['voro_moisture_octaves'] * 0.5)
 		voro_moisture_persistance = geno1['voro_moisture_persistance'] * 0.5 + geno2['voro_moisture_persistance'] * 0.5
+		temperature = geno1['temperature'] * 0.5 + geno2['temperature'] * 0.5
 
 
 		child.append({
@@ -443,6 +457,7 @@ class MapGenetic(GenericGenetic):
 			'height_scale': scale,
 			'randomtype': geno1['randomtype'] if random.randint() % 2 == 0 else geno2['randomtype'],
 			'seed': geno1['seed'] if random.randint() % 2 == 0 else geno2['seed'],
+			'temperature' : temperature,
 			'voro_points_count': voro_points_count,
 			'voro_regular': voro_regular,
 			'voro_land_threshold': voro_land_threshold,

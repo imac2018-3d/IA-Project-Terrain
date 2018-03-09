@@ -21,6 +21,8 @@ class RegionType(Enum):
 	JUNGLE = 7
 	SAND = 8
 	ROCK = 9
+	ICE = 10
+	KARBON = 11
 
 
 def array2RGB(arr, size):
@@ -43,6 +45,7 @@ class VoronoiMap:
 			self.neighbours = set()
 			self.moisture = -1
 			self.height = -1
+			self.temperature = 20
 			if len(vertices_index) == 0:
 				self.type = RegionType.END
 			elif any(v < 0 for v in vertices_index):
@@ -112,29 +115,54 @@ class VoronoiMap:
 			else:
 				self.moisture = moisture + int(-1+np.random.random()*2)
 
+		def settemperature(self, temperature):
+			self.temperature = temperature + int(-1 + np.random.random() * 2)
+
 		def updatetype(self):
 			if self.type.value >= RegionType.LAND.value:
 				if self.height > 3:
 					if self.moisture > 3:
-						self.type = RegionType.SNOW
+						if self.temperature < 15:
+							self.type = RegionType.SNOW
+						elif self.temperature > 20:
+							self.type = RegionType.GRASS
+						else:
+							self.type = RegionType.BARE
 					else:
-						self.type = RegionType.BARE
+						if self.temperature < 15:
+							self.type = RegionType.ICE
+						elif self.temperature > 20:
+							self.type = RegionType.KARBON
+						else:
+							self.type = RegionType.BARE
 				elif self.height > 1:
-					if self.moisture > 4:
-						self.type = RegionType.JUNGLE
-					elif self.moisture > 2:
-						self.type = RegionType.FOREST
-					elif self.moisture > 0:
-						self.type = RegionType.GRASS
+					if self.temperature < 8:
+						if self.moisture > 3:
+							self.type = RegionType.SNOW
+						else:
+							self.type = RegionType.ICE
 					else:
-						self.type = RegionType.ROCK
+						if self.moisture > 4:
+							self.type = RegionType.JUNGLE
+						elif self.moisture > 2:
+							self.type = RegionType.FOREST
+						elif self.moisture > 0:
+							self.type = RegionType.GRASS
+						else:
+							self.type = RegionType.ROCK
 				else:
-					if self.moisture > 4:
-						self.type = RegionType.SAND
-					elif self.moisture > 2:
-						self.type = RegionType.GRASS
+					if self.temperature < 5:
+						if self.moisture > 3:
+							self.type = RegionType.SNOW
+						else:
+							self.type = RegionType.ICE
 					else:
-						self.type = RegionType.ROCK
+						if self.moisture > 4:
+							self.type = RegionType.SAND
+						elif self.moisture > 2:
+							self.type = RegionType.GRASS
+						else:
+							self.type = RegionType.ROCK
 
 		def draw(self, draw, map, scale=(1, 1), maxheight=10):
 			if self.point is None or self.type == RegionType.END:
@@ -152,6 +180,10 @@ class VoronoiMap:
 					r = (r + g + b) / 3 + (-10 + random.random() * 20)
 					g = (r + g + b) / 3
 					b = (r + g + b) / 4
+				if self.type == RegionType.KARBON:
+					r = (r + g + b) / 4 + (-10 + random.random() * 20)
+					g = (r + g + b) / 4
+					b = (r + g + b) / 6
 				elif self.type == RegionType.ROCK:
 					r = (r + g + b) / 4 + (-10 + random.random() * 20)
 					g = (r + g + b) / 5 + (-10 + random.random() * 20)
@@ -160,6 +192,10 @@ class VoronoiMap:
 					r = r + 200 * heightcoef
 					g = g + 200 * heightcoef
 					b = b + 200 * heightcoef
+				elif self.type == RegionType.ICE:
+					r = r + 50 * heightcoef
+					g = g + 50 * heightcoef
+					b = b + 250 * heightcoef
 				elif self.type == RegionType.GRASS:
 					r = r - 150 + (-20 + random.random() * 20)
 					g = g + 70 + (-10 + random.random() * 20)
@@ -225,7 +261,7 @@ class VoronoiMap:
 	def __init__(self, sizex, sizey, xx=None, yy=None, pointscount=200, regular=0, landthreshold=0,
 				searelativethreshold=0.1, radialbias=1.0, heightfreq=5, heightoctaves=1, heightpersistance=1.0,
 				 heightstep=1.0, moisturestart=10.0, moisturestep=1.0, moisturefreq=5, moistureoctaves=1, moisturepersistance=1.0,
-				 seed=1):
+				 seed=1, temperature=20):
 		if seed < 0:
 			np.random.seed(None)
 		else:
@@ -268,6 +304,7 @@ class VoronoiMap:
 		self.checklake()
 		self.setheight(heightstep)
 		self.setmoisture(moisturestart, moisturestep, moisturefreq, moistureoctaves, moisturepersistance)
+		self.settemperature(temperature)
 		self.updatetypes()
 
 	def regulax(self, level=1):
@@ -361,6 +398,11 @@ class VoronoiMap:
 						else:
 							neighbour.setmoisture(moisturestart+np.random.random()*moisturestep*2-moisturestep)
 						nextregions.add(neighbour)
+
+	def settemperature(self, temperature=20.0):
+		for region in self.regions:
+			if region.type.value >= RegionType.LAND.value:
+				region.settemperature(temperature)
 
 	def updatetypes(self):
 		for region in self.regions:
