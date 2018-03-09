@@ -8,7 +8,6 @@ blend_dir = os.path.dirname(bpy.data.filepath)
 if blend_dir not in sys.path:
 	sys.path.append(blend_dir)
 
-from StoneEdgeGeneration import main
 import StoneEdgeGeneration.Communication.Communication
 from StoneEdgeGeneration.Communication import process_client
 from StoneEdgeGeneration.Communication.Communication import Communication
@@ -112,7 +111,6 @@ def unregister():
 
 
 if __name__ == "__main__":
-	reload(main)
 	reload(process_client)
 	reload(utils)
 	reload(bpyutils)

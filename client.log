@@ -1,0 +1,94 @@
+2018-03-08 15:26:55,813 :: INFO :: Start client
+2018-03-08 15:26:55,814 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:26:59,586 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 133, in startGeneration
+    self.updateAssetController()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 127, in updateAssetController
+    show_mode=show_mode)
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Asset\genericgenetic.py", line 121, in reset
+    self.fill_genotypes()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Asset\genericgenetic.py", line 142, in fill_genotypes
+    self.genotypes.append(self.get_genetic_class()(parent=self.parentObject))
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Asset\genericgenetic.py", line 133, in get_genetic_class
+    module = import_module(self.geneticClass[0])
+  File "C:\Program Files\lib\importlib\__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 673, in exec_module
+  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Terrain\Map.py", line 10, in <module>
+    from StoneEdgeGeneration.Terrain.Voronoi import VoronoiMap
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Terrain\Voronoi.py", line 3, in <module>
+    from PIL import Image, ImageDraw
+ImportError: No module named 'PIL'
+2018-03-08 15:28:22,422 :: INFO :: End client
+2018-03-08 15:28:26,205 :: INFO :: Start client
+2018-03-08 15:28:26,205 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:28:59,456 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
+    self.generate()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
+    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
+TypeError: Can't convert 'NoneType' object to str implicitly
+2018-03-08 15:29:03,525 :: INFO :: End client
+2018-03-08 15:30:06,506 :: INFO :: Start client
+2018-03-08 15:30:06,506 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:30:38,897 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
+    self.generate()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
+    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
+TypeError: Can't convert 'NoneType' object to str implicitly
+2018-03-08 15:32:50,709 :: INFO :: Start client
+2018-03-08 15:32:50,710 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:33:24,877 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
+    self.generate()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
+    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
+TypeError: Can't convert 'NoneType' object to str implicitly
+2018-03-08 15:40:19,459 :: INFO :: End client
+2018-03-08 15:40:22,183 :: INFO :: Start client
+2018-03-08 15:40:22,183 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:40:54,353 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
+    self.generate()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
+    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
+TypeError: Can't convert 'NoneType' object to str implicitly
+2018-03-08 15:42:49,182 :: INFO :: End client
+2018-03-08 15:42:54,075 :: INFO :: End client
+2018-03-08 15:42:57,215 :: INFO :: Start client
+2018-03-08 15:42:57,216 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:43:14,852 :: ERROR :: Exception occurred: 
+Traceback (most recent call last):
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
+    self.generate()
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 207, in generate
+    imgpath = Communication.receivedata(30)
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Communication\Communication.py", line 31, in receivedata
+    res=Communication.channel.receive(timeout)
+  File "<string>", line 737, in receive
+EOFError
+2018-03-08 15:43:14,867 :: INFO :: End client
+2018-03-08 15:43:25,607 :: INFO :: Start client
+2018-03-08 15:43:25,607 :: INFO :: Channel:<Channel id=1 open>
+2018-03-08 15:43:32,021 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic0.png
+2018-03-08 15:43:32,830 :: DEBUG :: data: 0
+2018-03-08 15:43:36,590 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic1.png
+2018-03-08 15:43:37,220 :: DEBUG :: data: 0
+2018-03-08 15:43:40,689 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic2.png
+2018-03-08 15:43:41,297 :: DEBUG :: data: 0
+2018-03-08 15:43:44,756 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic3.png
+2018-03-08 15:43:45,368 :: DEBUG :: data: 0
+2018-03-08 15:43:49,128 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic4.png
+2018-03-08 15:43:49,706 :: DEBUG :: data: 0
+2018-03-08 15:44:43,753 :: INFO :: End client

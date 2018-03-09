@@ -1,4 +1,4 @@
-import matplotlib, math
+import math
 import time
 import numpy as np
 import noise
@@ -191,6 +191,7 @@ def heightmap3(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True, 
             heightmap2(sizex, sizey, sizez, xx, yy, zz, smooth, freq2, mean, scale, seed, randomtype) * coefMap2)
 
 def main():
+    import matplotlib
     matplotlib.interactive(True)
     matplotlib.use('Qt5Agg')
     import matplotlib.pyplot as plt

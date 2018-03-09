@@ -1,7 +1,5 @@
-import matplotlib
 import numpy as np
 import noise
-from PIL import Image, ImageDraw
 from scipy.spatial import voronoi_plot_2d
 from scipy.spatial import Voronoi
 from enum import Enum
@@ -340,6 +338,7 @@ class VoronoiMap:
 			region.updatetype()
 
 	def toimage(self):
+		from PIL import Image, ImageDraw
 		image = Image.new('RGB', (self.sizex, self.sizey), (10, 12, 50))
 		draw = ImageDraw.Draw(image)
 		maxheight = 0
@@ -350,6 +349,7 @@ class VoronoiMap:
 		return image
 
 	def togrid(self):
+		from PIL import Image, ImageDraw
 		image = Image.new('L', (self.sizex, self.sizey), 0)
 		draw = ImageDraw.Draw(image)
 		for region in self.regions:
@@ -357,6 +357,8 @@ class VoronoiMap:
 		return np.asarray(image)
 
 	def toheightmap(self):
+		from PIL import Image, ImageDraw
+
 		image = Image.new('L', (self.sizex, self.sizey), 0)
 		draw = ImageDraw.Draw(image)
 		maxheight = 0
@@ -374,6 +376,7 @@ class VoronoiMap:
 		return image
 
 def main():
+	import matplotlib
 	matplotlib.interactive(True)
 	matplotlib.use('Qt5Agg')
 	import matplotlib.pyplot as plt
