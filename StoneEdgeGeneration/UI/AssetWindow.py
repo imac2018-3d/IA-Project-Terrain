@@ -22,7 +22,7 @@ class AssetWindow(BaseWindow.BaseWindow):
 		except StopIteration:
 			pass
 
-		self.genetic_class_UI = Parameter.RadioButtonParameter("Class to generate",radiobtns)
+		self.genetic_class_UI = Parameter.RadioButtonParameter("Class to generate", radiobtns)
 		self.class_buttons = self.addRadioButtons(self.genetic_class_UI)
 
 		self.max_genotypes_UI = Parameter.SliderParameter("Maximum number per generation", 50, 3, 100)
@@ -48,12 +48,12 @@ class AssetWindow(BaseWindow.BaseWindow):
 		self.alt_procreation = [key for key, value in self.alt_procreation_UI.values.items() if value == True][0]
 		self.show_mode = [key for key, value in self.show_mode_UI.values.items() if value == True][0]
 
-		Communication.log(genetic_class)
-		Communication.log(self.max_genotypes)
-		Communication.log(self.selection_type)
-		Communication.log(self.selection_type_param)
-		Communication.log(self.alt_procreation)
-		Communication.log(self.show_mode)
+		# Communication.log(genetic_class)
+		# Communication.log(self.max_genotypes)
+		# Communication.log(self.selection_type)
+		# Communication.log(self.selection_type_param)
+		# Communication.log(self.alt_procreation)
+		# Communication.log(self.show_mode)
 
 		try:
 			self.assetController = genericgenetic.AssetGeneticsController(genetic_class,

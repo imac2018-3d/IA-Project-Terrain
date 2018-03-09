@@ -9,8 +9,23 @@ class Individual:
 		self.image = str(self)
 		bpyutils.saveImage(self.image)
 
+	def createModel(self):
+		Communication.log("CREATE MODEL - Individual")
+		print("HEEEEY")
+		from StoneEdgeGeneration import bpyutils
+		# self.model = "coucou"
+		Communication.sendcommand(
+			"import StoneEdgeGeneration.bpyutils as bpyutils\n"
+			"bpyutils.saveModel('coucou'))\n"
+			"client.send(0)\n"
+		)
+
 	def setImage(self, imagename):
 		self.image = imagename
+
+	def setModel(self, modelname):
+		self.model = modelname
+
 
 	def setWeight(self, weight):
 		self.weight = weight

@@ -11,6 +11,9 @@ from StoneEdgeGeneration.UI import Individual, Parameter
 from StoneEdgeGeneration.Asset import genericgenetic
 reload(UI)
 
+def printyolo():
+	Communication.log("yolo")
+
 def makeRadioParameters(options):
 	iterator = iter(options)
 	radioparameter = {next(iterator): True}
@@ -46,6 +49,7 @@ class BaseWindow(QtWidgets.QWidget):
 
 		generateButton = QtWidgets.QPushButton()
 		generateButton.setText("Generate")
+		generateButton.clicked.connect(self.disableParameters)
 		generateButton.clicked.connect(self.startGeneration)
 		self.mainLayout.addWidget(generateButton, 1, 0)
 
@@ -65,6 +69,7 @@ class BaseWindow(QtWidgets.QWidget):
 
 		self.setLayout(self.mainLayout)
 
+		''' INIT PARAMETERS '''
 		classParameter = Parameter.RadioButtonParameter("Object to generate", makeRadioParameters(self.classes))
 		self.class_btn = self.addRadioButtons(classParameter)
 		self.class_btn.buttonPressed.connect(self.clearResults)
@@ -175,6 +180,7 @@ class BaseWindow(QtWidgets.QWidget):
 
 		saveBtn = QtWidgets.QPushButton()
 		saveBtn.setText("Save")
+		saveBtn.pressed.connect(individual.createModel)
 		buttonsHLayout.addWidget(saveBtn)
 
 		imageVLayout.addWidget(buttonsGBox)
@@ -204,14 +210,14 @@ class BaseWindow(QtWidgets.QWidget):
 				"print(utils.getImagePath('" + str(individual) + "'))\n"
 				"client.send(utils.getImagePath('" + str(individual) + "'))\n"
 			)
-			imgpath = Communication.receivedata(30)
+			imgpath = Communication.receivedata(None)
 			Communication.sendcommand(
 				"import StoneEdgeGeneration.bpyutils as bpyutils\n"
 				"bpyutils.saveImage('" + imgpath + "', "
 					"("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
 				"client.send(0)\n"
 			)
-			Communication.receivedata(30)
+			Communication.receivedata(None)
 			individual.setImage(imgpath)
 			self.addIndividual(individual)
 
@@ -291,3 +297,7 @@ class BaseWindow(QtWidgets.QWidget):
 			widget.deleteLater()
 		self.individuals.clear()
 
+	def disableParameters(self):
+		pass
+		# self.parametersVBox.setEnabled(True)
+		# self.resultGBox.setEnabled(False)
