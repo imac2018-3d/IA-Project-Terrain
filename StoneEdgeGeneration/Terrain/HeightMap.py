@@ -167,10 +167,18 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
         return fastsinusoid(shiftx+x*freqx, shifty+y*freqy, shiftz+z*freqz) * 0.3333
 
     coefX, coefY, coefZ = 1/sizex, 1/sizey, 1/sizez
-    for i in range(points.shape[0]):
-        for j in range(points.shape[1]):
+    for i in range(points.shape[0]-3, 3):
+        for j in range(points.shape[1]-3, 3):
             for k in range(points.shape[2]):
                 points[i][j][k] = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
+                points[i][j + 2][k] =\
+                    points[i+2][j][k] =\
+                    points[i+2][j+2][k] = func((i+2)*coefX-0.5, (j+2)*coefY-0.5, k*coefZ-0.5)
+                points[i+1][j][k] =\
+                    points[i][j+1][k] =\
+                    points[i+1][j+1][k] = (points[i][j][k]+points[i+2][j+2][k])*0.5
+
+
 
     randvalue = randomfunc(mean, scale, points.shape) * 0.3
     randvalue = randvalue + randomfunc(mean, scale, points.shape) * 0.1
