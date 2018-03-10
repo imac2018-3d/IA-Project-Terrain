@@ -16,6 +16,7 @@ from logging.handlers import RotatingFileHandler
 class Client:
 	def __init__(self):
 		self.app = QtWidgets.QApplication(sys.argv)
+		self.app.setApplicationName("Stone Edge Generation")
 		self.app.setQuitOnLastWindowClosed(True)
 		self.timer = QTimer()
 

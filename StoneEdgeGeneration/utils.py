@@ -19,8 +19,8 @@ def getImagePath(imageName="", dirpath=""):
 
 def getModelPath(modelName="", dirpath=""):
     dirpath = _defaultdirpath(dirpath)
-    folder = dirpath + "/StoneEdgeGeneration/Resources/Images/"
+    folder = dirpath + "/StoneEdgeGeneration/Resources/Models/"
     if modelName:
-        return os.path.normpath(os.path.join(folder, modelName + ".png")).replace("\\","/")
+        return os.path.normpath(os.path.join(folder, modelName + ".obj")).replace("\\","/")
     else:
         return folder.replace("\\","/")

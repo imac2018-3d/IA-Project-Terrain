@@ -8,3 +8,6 @@ StoneEdgeGeneration/virtualenv/pip-selfcheck.json
 **/*.pyc
 __pycache__
 *.pyc
+*.png
+*.log
+*.pyc

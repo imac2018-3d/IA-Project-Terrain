@@ -1,94 +1,384 @@
-2018-03-08 15:26:55,813 :: INFO :: Start client
-2018-03-08 15:26:55,814 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:26:59,586 :: ERROR :: Exception occurred: 
+2018-03-10 15:41:22,834 :: INFO :: Start client
+2018-03-10 15:41:22,834 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:49:47,515 :: INFO :: Start client
+2018-03-10 15:49:47,516 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:50:12,825 :: ERROR :: Exception occurred: 
 Traceback (most recent call last):
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 133, in startGeneration
-    self.updateAssetController()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 127, in updateAssetController
-    show_mode=show_mode)
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Asset\genericgenetic.py", line 121, in reset
-    self.fill_genotypes()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Asset\genericgenetic.py", line 142, in fill_genotypes
-    self.genotypes.append(self.get_genetic_class()(parent=self.parentObject))
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Asset\genericgenetic.py", line 133, in get_genetic_class
-    module = import_module(self.geneticClass[0])
-  File "C:\Program Files\lib\importlib\__init__.py", line 126, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-  File "<frozen importlib._bootstrap>", line 986, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 673, in exec_module
-  File "<frozen importlib._bootstrap>", line 222, in _call_with_frames_removed
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Terrain\Map.py", line 10, in <module>
-    from StoneEdgeGeneration.Terrain.Voronoi import VoronoiMap
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Terrain\Voronoi.py", line 3, in <module>
-    from PIL import Image, ImageDraw
-ImportError: No module named 'PIL'
-2018-03-08 15:28:22,422 :: INFO :: End client
-2018-03-08 15:28:26,205 :: INFO :: Start client
-2018-03-08 15:28:26,205 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:28:59,456 :: ERROR :: Exception occurred: 
-Traceback (most recent call last):
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 136, in startGeneration
     self.generate()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
-    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
-TypeError: Can't convert 'NoneType' object to str implicitly
-2018-03-08 15:29:03,525 :: INFO :: End client
-2018-03-08 15:30:06,506 :: INFO :: Start client
-2018-03-08 15:30:06,506 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:30:38,897 :: ERROR :: Exception occurred: 
-Traceback (most recent call last):
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
-    self.generate()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
-    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
-TypeError: Can't convert 'NoneType' object to str implicitly
-2018-03-08 15:32:50,709 :: INFO :: Start client
-2018-03-08 15:32:50,710 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:33:24,877 :: ERROR :: Exception occurred: 
-Traceback (most recent call last):
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
-    self.generate()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
-    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
-TypeError: Can't convert 'NoneType' object to str implicitly
-2018-03-08 15:40:19,459 :: INFO :: End client
-2018-03-08 15:40:22,183 :: INFO :: Start client
-2018-03-08 15:40:22,183 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:40:54,353 :: ERROR :: Exception occurred: 
-Traceback (most recent call last):
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
-    self.generate()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 211, in generate
-    "("+str(camerapos[0])+", "+str(camerapos[1])+", "+str(camerapos[2])+"))\n"
-TypeError: Can't convert 'NoneType' object to str implicitly
-2018-03-08 15:42:49,182 :: INFO :: End client
-2018-03-08 15:42:54,075 :: INFO :: End client
-2018-03-08 15:42:57,215 :: INFO :: Start client
-2018-03-08 15:42:57,216 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:43:14,852 :: ERROR :: Exception occurred: 
-Traceback (most recent call last):
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 134, in startGeneration
-    self.generate()
-  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 207, in generate
-    imgpath = Communication.receivedata(30)
+  File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\UI\BaseWindow.py", line 210, in generate
+    imgpath = Communication.receivedata(None)
   File "C:\Users\helor\StoneEdgeGenerationOLD\StoneEdgeGeneration\Communication\Communication.py", line 31, in receivedata
     res=Communication.channel.receive(timeout)
   File "<string>", line 737, in receive
 EOFError
-2018-03-08 15:43:14,867 :: INFO :: End client
-2018-03-08 15:43:25,607 :: INFO :: Start client
-2018-03-08 15:43:25,607 :: INFO :: Channel:<Channel id=1 open>
-2018-03-08 15:43:32,021 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic0.png
-2018-03-08 15:43:32,830 :: DEBUG :: data: 0
-2018-03-08 15:43:36,590 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic1.png
-2018-03-08 15:43:37,220 :: DEBUG :: data: 0
-2018-03-08 15:43:40,689 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic2.png
-2018-03-08 15:43:41,297 :: DEBUG :: data: 0
-2018-03-08 15:43:44,756 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic3.png
-2018-03-08 15:43:45,368 :: DEBUG :: data: 0
-2018-03-08 15:43:49,128 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic4.png
-2018-03-08 15:43:49,706 :: DEBUG :: data: 0
-2018-03-08 15:44:43,753 :: INFO :: End client
+2018-03-10 15:50:12,855 :: INFO :: End client
+2018-03-10 15:50:45,681 :: INFO :: Start client
+2018-03-10 15:50:45,682 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:50:51,639 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:50:52,470 :: DEBUG :: data: 0
+2018-03-10 15:50:54,762 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:50:55,457 :: DEBUG :: data: 0
+2018-03-10 15:50:57,763 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:50:58,441 :: DEBUG :: data: 0
+2018-03-10 15:51:00,479 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:51:01,103 :: DEBUG :: data: 0
+2018-03-10 15:51:01,341 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:51:01,611 :: DEBUG :: data: 0
+2018-03-10 15:53:13,923 :: INFO :: Start client
+2018-03-10 15:53:13,924 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:53:16,538 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:53:16,786 :: DEBUG :: data: 0
+2018-03-10 15:53:17,191 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:53:17,421 :: DEBUG :: data: 0
+2018-03-10 15:53:17,667 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:53:17,898 :: DEBUG :: data: 0
+2018-03-10 15:53:20,246 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:53:20,987 :: DEBUG :: data: 0
+2018-03-10 15:53:21,255 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:53:21,503 :: DEBUG :: data: 0
+2018-03-10 15:53:24,838 :: INFO :: End client
+2018-03-10 15:53:27,483 :: INFO :: End client
+2018-03-10 15:53:38,342 :: INFO :: Start client
+2018-03-10 15:53:38,342 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:53:43,809 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:53:44,577 :: DEBUG :: data: 0
+2018-03-10 15:53:44,936 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:53:45,151 :: DEBUG :: data: 0
+2018-03-10 15:53:45,425 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:53:45,677 :: DEBUG :: data: 0
+2018-03-10 15:53:45,930 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:53:46,170 :: DEBUG :: data: 0
+2018-03-10 15:53:48,416 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:53:49,310 :: DEBUG :: data: 0
+2018-03-10 15:53:52,855 :: INFO :: End client
+2018-03-10 15:54:38,485 :: INFO :: Start client
+2018-03-10 15:54:38,486 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:54:41,903 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:54:42,283 :: DEBUG :: data: 0
+2018-03-10 15:54:42,733 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:54:43,033 :: DEBUG :: data: 0
+2018-03-10 15:54:43,313 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:54:43,581 :: DEBUG :: data: 0
+2018-03-10 15:54:45,600 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:54:46,435 :: DEBUG :: data: 0
+2018-03-10 15:54:46,729 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:54:47,000 :: DEBUG :: data: 0
+2018-03-10 15:56:47,847 :: INFO :: End client
+2018-03-10 15:56:55,862 :: INFO :: Start client
+2018-03-10 15:56:55,863 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:56:58,562 :: DEBUG :: (-5, -5, 5)
+2018-03-10 15:56:59,070 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:56:59,441 :: DEBUG :: data: 0
+2018-03-10 15:56:59,565 :: DEBUG :: (-5, -5, 5)
+2018-03-10 15:57:01,677 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:57:02,395 :: DEBUG :: data: 0
+2018-03-10 15:57:02,404 :: DEBUG :: (-5, -5, 5)
+2018-03-10 15:57:02,690 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:57:02,940 :: DEBUG :: data: 0
+2018-03-10 15:57:02,949 :: DEBUG :: (-5, -5, 5)
+2018-03-10 15:57:03,195 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:57:03,466 :: DEBUG :: data: 0
+2018-03-10 15:57:03,476 :: DEBUG :: (-5, -5, 5)
+2018-03-10 15:57:05,432 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:57:06,174 :: DEBUG :: data: 0
+2018-03-10 15:58:31,782 :: INFO :: Start client
+2018-03-10 15:58:31,782 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:58:34,211 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:58:34,453 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:58:34,691 :: DEBUG :: data: 0
+2018-03-10 15:58:34,816 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:58:35,051 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:58:35,260 :: DEBUG :: data: 0
+2018-03-10 15:58:35,269 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:58:37,256 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:58:37,887 :: DEBUG :: data: 0
+2018-03-10 15:58:37,897 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:58:38,106 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:58:38,320 :: DEBUG :: data: 0
+2018-03-10 15:58:38,329 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:58:40,757 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:58:41,496 :: DEBUG :: data: 0
+2018-03-10 15:58:52,504 :: INFO :: End client
+2018-03-10 15:58:56,350 :: INFO :: End client
+2018-03-10 15:59:22,882 :: INFO :: Start client
+2018-03-10 15:59:22,883 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 15:59:26,592 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:59:27,091 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 15:59:27,434 :: DEBUG :: data: 0
+2018-03-10 15:59:27,562 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:59:27,836 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 15:59:28,102 :: DEBUG :: data: 0
+2018-03-10 15:59:28,111 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:59:30,346 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 15:59:31,218 :: DEBUG :: data: 0
+2018-03-10 15:59:31,227 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:59:33,422 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 15:59:34,114 :: DEBUG :: data: 0
+2018-03-10 15:59:34,123 :: DEBUG :: <class 'StoneEdgeGeneration.Asset.generators.Tree.TreeGenetic'>
+2018-03-10 15:59:36,385 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 15:59:37,307 :: DEBUG :: data: 0
+2018-03-10 16:00:08,926 :: INFO :: End client
+2018-03-10 16:00:11,493 :: INFO :: Start client
+2018-03-10 16:00:11,493 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:00:14,769 :: DEBUG :: (-100, -40, 30)
+2018-03-10 16:00:16,357 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic0.png
+2018-03-10 16:00:16,547 :: DEBUG :: data: 0
+2018-03-10 16:00:17,006 :: DEBUG :: (-100, -40, 30)
+2018-03-10 16:00:17,252 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic1.png
+2018-03-10 16:00:17,364 :: DEBUG :: data: 0
+2018-03-10 16:00:17,687 :: DEBUG :: (-100, -40, 30)
+2018-03-10 16:00:18,963 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic2.png
+2018-03-10 16:00:19,100 :: DEBUG :: data: 0
+2018-03-10 16:00:19,463 :: DEBUG :: (-100, -40, 30)
+2018-03-10 16:00:20,783 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic3.png
+2018-03-10 16:00:20,907 :: DEBUG :: data: 0
+2018-03-10 16:00:21,301 :: DEBUG :: (-100, -40, 30)
+2018-03-10 16:00:22,263 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/MapGenetic4.png
+2018-03-10 16:00:22,392 :: DEBUG :: data: 0
+2018-03-10 16:02:49,264 :: INFO :: Start client
+2018-03-10 16:02:49,264 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:02:52,218 :: DEBUG :: (-15, -40, 20)
+2018-03-10 16:02:52,468 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:02:52,647 :: DEBUG :: data: 0
+2018-03-10 16:02:52,776 :: DEBUG :: (-15, -40, 20)
+2018-03-10 16:02:54,929 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:02:55,407 :: DEBUG :: data: 0
+2018-03-10 16:02:55,416 :: DEBUG :: (-15, -40, 20)
+2018-03-10 16:02:55,637 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:02:55,821 :: DEBUG :: data: 0
+2018-03-10 16:02:55,829 :: DEBUG :: (-15, -40, 20)
+2018-03-10 16:02:56,068 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:02:56,243 :: DEBUG :: data: 0
+2018-03-10 16:02:56,250 :: DEBUG :: (-15, -40, 20)
+2018-03-10 16:02:56,478 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:02:56,657 :: DEBUG :: data: 0
+2018-03-10 16:03:02,357 :: INFO :: End client
+2018-03-10 16:03:20,867 :: DEBUG :: (-100, -40, 30)
+2018-03-10 16:03:40,400 :: INFO :: Start client
+2018-03-10 16:03:40,400 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:03:43,929 :: DEBUG :: (-30, -15, 20)
+2018-03-10 16:03:46,071 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:03:46,596 :: DEBUG :: data: 0
+2018-03-10 16:03:46,721 :: DEBUG :: (-30, -15, 20)
+2018-03-10 16:03:46,936 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:03:47,177 :: DEBUG :: data: 0
+2018-03-10 16:03:47,184 :: DEBUG :: (-30, -15, 20)
+2018-03-10 16:03:47,389 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:03:47,583 :: DEBUG :: data: 0
+2018-03-10 16:03:47,590 :: DEBUG :: (-30, -15, 20)
+2018-03-10 16:03:47,802 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:03:47,989 :: DEBUG :: data: 0
+2018-03-10 16:03:47,997 :: DEBUG :: (-30, -15, 20)
+2018-03-10 16:03:50,209 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:03:50,720 :: DEBUG :: data: 0
+2018-03-10 16:03:55,358 :: INFO :: End client
+2018-03-10 16:05:09,637 :: INFO :: Start client
+2018-03-10 16:05:09,638 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:05:11,536 :: DEBUG :: (-15, -15, 30)
+2018-03-10 16:05:14,008 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:05:14,937 :: DEBUG :: data: 0
+2018-03-10 16:05:15,077 :: DEBUG :: (-15, -15, 30)
+2018-03-10 16:05:15,347 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:05:15,597 :: DEBUG :: data: 0
+2018-03-10 16:05:15,609 :: DEBUG :: (-15, -15, 30)
+2018-03-10 16:05:17,851 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:05:18,407 :: DEBUG :: data: 0
+2018-03-10 16:05:18,416 :: DEBUG :: (-15, -15, 30)
+2018-03-10 16:05:20,701 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:05:21,746 :: DEBUG :: data: 0
+2018-03-10 16:05:21,756 :: DEBUG :: (-15, -15, 30)
+2018-03-10 16:05:22,003 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:05:22,316 :: DEBUG :: data: 0
+2018-03-10 16:06:27,112 :: INFO :: End client
+2018-03-10 16:06:58,747 :: INFO :: Start client
+2018-03-10 16:06:58,747 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:07:02,066 :: DEBUG :: (-15, -30, 30)
+2018-03-10 16:07:02,682 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:07:03,044 :: DEBUG :: data: 0
+2018-03-10 16:07:03,204 :: DEBUG :: (-15, -30, 30)
+2018-03-10 16:07:03,484 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:07:03,731 :: DEBUG :: data: 0
+2018-03-10 16:07:03,743 :: DEBUG :: (-15, -30, 30)
+2018-03-10 16:07:06,653 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:07:07,413 :: DEBUG :: data: 0
+2018-03-10 16:07:07,425 :: DEBUG :: (-15, -30, 30)
+2018-03-10 16:07:09,503 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:07:10,218 :: DEBUG :: data: 0
+2018-03-10 16:07:10,229 :: DEBUG :: (-15, -30, 30)
+2018-03-10 16:07:12,465 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:07:13,227 :: DEBUG :: data: 0
+2018-03-10 16:07:22,220 :: INFO :: End client
+2018-03-10 16:07:57,479 :: INFO :: Start client
+2018-03-10 16:07:57,480 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:07:59,630 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:08:00,180 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:08:00,565 :: DEBUG :: data: 0
+2018-03-10 16:08:00,709 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:08:03,675 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:08:04,297 :: DEBUG :: data: 0
+2018-03-10 16:08:04,309 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:08:07,371 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:08:08,158 :: DEBUG :: data: 0
+2018-03-10 16:08:08,168 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:08:10,890 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:08:11,605 :: DEBUG :: data: 0
+2018-03-10 16:08:11,616 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:08:13,726 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:08:14,323 :: DEBUG :: data: 0
+2018-03-10 16:12:48,776 :: INFO :: Start client
+2018-03-10 16:12:48,776 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:12:51,079 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:12:51,355 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:15:43,457 :: INFO :: Start client
+2018-03-10 16:15:43,457 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:15:46,985 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:15:47,186 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:16:33,617 :: INFO :: Start client
+2018-03-10 16:16:33,617 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:16:36,313 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:16:36,554 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:16:36,740 :: DEBUG :: data: 0
+2018-03-10 16:16:36,878 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:16:37,111 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:16:37,316 :: DEBUG :: data: 0
+2018-03-10 16:16:37,326 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:16:37,615 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:16:37,822 :: DEBUG :: data: 0
+2018-03-10 16:16:37,835 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:16:39,922 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:16:40,481 :: DEBUG :: data: 0
+2018-03-10 16:16:40,491 :: DEBUG :: (-30, -15, 30)
+2018-03-10 16:16:40,726 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:16:40,935 :: DEBUG :: data: 0
+2018-03-10 16:17:41,468 :: INFO :: Start client
+2018-03-10 16:17:41,468 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:17:43,484 :: DEBUG :: (-30, -15, 100)
+2018-03-10 16:17:46,501 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:17:47,112 :: DEBUG :: data: 0
+2018-03-10 16:17:47,262 :: DEBUG :: (-30, -15, 100)
+2018-03-10 16:17:47,521 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:17:47,734 :: DEBUG :: data: 0
+2018-03-10 16:17:47,744 :: DEBUG :: (-30, -15, 100)
+2018-03-10 16:17:49,752 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:17:50,265 :: DEBUG :: data: 0
+2018-03-10 16:17:50,272 :: DEBUG :: (-30, -15, 100)
+2018-03-10 16:17:52,213 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:17:52,746 :: DEBUG :: data: 0
+2018-03-10 16:17:52,755 :: DEBUG :: (-30, -15, 100)
+2018-03-10 16:17:52,975 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:17:53,173 :: DEBUG :: data: 0
+2018-03-10 16:18:07,182 :: INFO :: End client
+2018-03-10 16:20:47,591 :: INFO :: Start client
+2018-03-10 16:20:47,591 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:20:51,592 :: DEBUG :: (-30, -15, 50)
+2018-03-10 16:20:51,791 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:20:51,997 :: DEBUG :: data: 0
+2018-03-10 16:20:52,132 :: DEBUG :: (-30, -15, 50)
+2018-03-10 16:20:54,433 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:20:55,061 :: DEBUG :: data: 0
+2018-03-10 16:20:55,069 :: DEBUG :: (-30, -15, 50)
+2018-03-10 16:20:57,111 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:20:57,720 :: DEBUG :: data: 0
+2018-03-10 16:20:57,730 :: DEBUG :: (-30, -15, 50)
+2018-03-10 16:20:57,957 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:20:58,190 :: DEBUG :: data: 0
+2018-03-10 16:20:58,203 :: DEBUG :: (-30, -15, 50)
+2018-03-10 16:20:58,401 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:20:58,581 :: DEBUG :: data: 0
+2018-03-10 16:21:04,443 :: INFO :: End client
+2018-03-10 16:21:11,443 :: INFO :: Start client
+2018-03-10 16:21:11,443 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:21:13,738 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:21:16,107 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:21:16,682 :: DEBUG :: data: 0
+2018-03-10 16:21:16,807 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:21:19,539 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:21:20,113 :: DEBUG :: data: 0
+2018-03-10 16:21:20,122 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:21:22,093 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:21:22,741 :: DEBUG :: data: 0
+2018-03-10 16:21:22,755 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:21:22,988 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:21:23,190 :: DEBUG :: data: 0
+2018-03-10 16:21:23,198 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:21:23,387 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:21:23,575 :: DEBUG :: data: 0
+2018-03-10 16:21:58,725 :: DEBUG :: Open individual
+2018-03-10 16:22:06,713 :: INFO :: End client
+2018-03-10 16:22:22,214 :: INFO :: Start client
+2018-03-10 16:22:22,214 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:22:25,741 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:22:26,009 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:22:26,251 :: DEBUG :: data: 0
+2018-03-10 16:22:26,394 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:22:29,062 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:22:29,681 :: DEBUG :: data: 0
+2018-03-10 16:22:29,689 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:22:29,937 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:22:30,180 :: DEBUG :: data: 0
+2018-03-10 16:22:30,191 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:22:32,446 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:22:33,025 :: DEBUG :: data: 0
+2018-03-10 16:22:33,033 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:22:35,102 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:22:35,690 :: DEBUG :: data: 0
+2018-03-10 16:23:04,049 :: INFO :: Start client
+2018-03-10 16:23:04,049 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:23:06,963 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:23:09,439 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:23:09,992 :: DEBUG :: data: 0
+2018-03-10 16:23:10,133 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:23:13,106 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:23:13,813 :: DEBUG :: data: 0
+2018-03-10 16:23:13,823 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:23:16,465 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:23:17,042 :: DEBUG :: data: 0
+2018-03-10 16:23:17,051 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:23:17,280 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:23:17,488 :: DEBUG :: data: 0
+2018-03-10 16:23:17,498 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:23:19,956 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:23:20,521 :: DEBUG :: data: 0
+2018-03-10 16:26:02,580 :: DEBUG :: cmd:
+client.close()
+2018-03-10 16:26:02,587 :: INFO :: End client
+2018-03-10 16:28:54,478 :: INFO :: Start client
+2018-03-10 16:28:54,478 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:28:58,812 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:29:01,087 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:29:01,772 :: DEBUG :: data: 0
+2018-03-10 16:29:01,921 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:29:04,850 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:29:05,658 :: DEBUG :: data: 0
+2018-03-10 16:29:05,672 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:29:07,932 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:29:08,517 :: DEBUG :: data: 0
+2018-03-10 16:29:08,525 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:29:08,758 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:29:08,943 :: DEBUG :: data: 0
+2018-03-10 16:29:08,950 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:29:09,172 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:29:09,374 :: DEBUG :: data: 0
+2018-03-10 16:29:14,321 :: INFO :: End client
+2018-03-10 16:29:54,534 :: INFO :: End client
+2018-03-10 16:29:54,550 :: INFO :: End client
+2018-03-10 16:29:54,551 :: INFO :: End client
+2018-03-10 16:30:04,375 :: INFO :: Start client
+2018-03-10 16:30:04,376 :: INFO :: Channel:<Channel id=1 open>
+2018-03-10 16:30:06,705 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:30:08,579 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic0.png
+2018-03-10 16:30:09,111 :: DEBUG :: data: 0
+2018-03-10 16:30:09,259 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:30:15,724 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic1.png
+2018-03-10 16:30:16,851 :: DEBUG :: data: 0
+2018-03-10 16:30:16,865 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:30:18,817 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic2.png
+2018-03-10 16:30:19,457 :: DEBUG :: data: 0
+2018-03-10 16:30:19,474 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:30:21,243 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic3.png
+2018-03-10 16:30:21,726 :: DEBUG :: data: 0
+2018-03-10 16:30:21,737 :: DEBUG :: (-30, -15, 70)
+2018-03-10 16:30:29,468 :: DEBUG :: data: C:/Users/helor/StoneEdgeGenerationOLD/StoneEdgeGeneration/Resources/Images/TreeGenetic4.png
+2018-03-10 16:30:30,946 :: DEBUG :: data: 0
+2018-03-10 16:30:36,370 :: INFO :: End client

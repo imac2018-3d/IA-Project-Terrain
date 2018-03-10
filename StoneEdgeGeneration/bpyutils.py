@@ -6,12 +6,19 @@ def getBasePath():
 
 def saveImage(name, camerapos=(-5,-5,5)):
 	from StoneEdgeGeneration.utils import getImagePath
+	position = bpy.data.objects[0].matrix_world.to_translation()
 	bpy.ops.object.lamp_add(type='POINT', location=(camerapos[0]-1,camerapos[1]-1,camerapos[2]+5))
 	light = bpy.context.object
 	light.data.energy = 2.5
 	light.data.distance = 40
 	bpy.ops.object.camera_add(view_align=True, location=camerapos, rotation=(math.pi/3,0,-math.pi/4))
 	bpy.context.scene.camera = bpy.context.object
+	
+	loc_camera = bpy.context.scene.camera.matrix_world.to_translation()
+	direction = position - loc_camera
+	rot_quat = direction.to_track_quat('-Z', 'Y')
+	bpy.context.scene.camera.rotation_euler = rot_quat.to_euler()
+
 	if name[-4:] == ".png":
 		name = name[:-4]
 	bpy.context.scene.render.filepath = getImagePath(name)
@@ -19,6 +26,10 @@ def saveImage(name, camerapos=(-5,-5,5)):
 	bpy.ops.object.delete()
 	bpy.context.scene.objects.active = light
 	bpy.ops.object.delete()
+
+def saveModel(name):
+	from StoneEdgeGeneration.utils import getModelPath
+	bpy.ops.export_scene.obj(filepath=getModelPath(name))
 
 def bpydeselect():
 	bpy.ops.object.select_all(action='DESELECT')
