@@ -7,7 +7,7 @@ from PyQt5 import QtWidgets
 
 from StoneEdgeGeneration.Communication.Communication import Communication
 from StoneEdgeGeneration import UI
-from StoneEdgeGeneration.UI import Individual, Parameter
+from StoneEdgeGeneration.UI import Individual, Parameter, FlowLayout
 from StoneEdgeGeneration.Asset import genericgenetic
 reload(UI)
 
@@ -57,9 +57,9 @@ class BaseWindow(QtWidgets.QWidget):
 		generateButton.clicked.connect(self.startGeneration)
 
 		''' RESULT '''
-		self.resultGBox = QtWidgets.QGroupBox()
-		self.resultGLayout = QtWidgets.QGridLayout()
-		self.resultGBox.setLayout(self.resultGLayout)
+		resultContent = QtWidgets.QGroupBox()
+		self.resultGLayout = FlowLayout.FlowLayout()
+		resultContent.setLayout(self.resultGLayout)
 		self.maxColumn = 3
 		self.elementRow = 0
 		self.elementColumn = 0
@@ -68,6 +68,13 @@ class BaseWindow(QtWidgets.QWidget):
 		self.nextGenerationButton.setText("Next Generation")
 		self.nextGenerationButton.clicked.connect(self.nextGeneration)
 		self.nextGenerationButton.setToolTip("Show next generation of assets")
+
+		self.resultGBox = QtWidgets.QScrollArea()
+		self.resultGBox.setWidget(resultContent)
+		self.resultGBox.setWidgetResizable(True)
+		self.resultGBox.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+		self.resultGBox.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+		self.resultGBox.setMinimumWidth(250)
 		
 		self.resultGBox.hide()
 		self.nextGenerationButton.hide()
@@ -169,12 +176,7 @@ class BaseWindow(QtWidgets.QWidget):
 		imageGBox = QtWidgets.QGroupBox()
 		imageVLayout = QtWidgets.QVBoxLayout()
 
-		self.resultGLayout.addWidget(imageGBox, self.elementRow, self.elementColumn)
-		if self.elementColumn < self.maxColumn:
-			self.elementColumn += 1
-		else:
-			self.elementColumn = 0
-			self.elementRow += 1
+		self.resultGLayout.addWidget(imageGBox)
 
 		# Image
 		image = QtWidgets.QPushButton()
@@ -249,6 +251,8 @@ class BaseWindow(QtWidgets.QWidget):
 			self.progressBar.setValue(i * 100 / len(self.assetController.genotypes))
 
 		self.progressBar.hide()
+		self.elementColumn = 0
+		self.elementRow = 0
 
 	def addButton(self, action):
 		btn = QtWidgets.QPushButton()
