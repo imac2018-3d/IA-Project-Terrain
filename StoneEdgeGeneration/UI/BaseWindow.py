@@ -37,33 +37,53 @@ class BaseWindow(QtWidgets.QWidget):
 			'all': 'all', 'solo': 'solo'
 		}
 
-		self.mainLayout = QtWidgets.QGridLayout()
+		self.mainLayout = QtWidgets.QVBoxLayout()
+
+		''' PROGRESS BAR '''
+		self.progressBar = QtWidgets.QProgressBar()
+		self.progressBar.setRange(0, 100)
+		self.progressBar.hide()
+		self.mainLayout.addWidget(self.progressBar)
 
 		''' PARAMETERS '''
-		self.parametersGBox = QtWidgets.QGroupBox("Parameters")
+		self.parametersGBox = QtWidgets.QGroupBox()
 		self.parametersVBoxLayout = QtWidgets.QVBoxLayout()
 		self.parametersGBox.setLayout(self.parametersVBoxLayout)
-		self.mainLayout.addWidget(self.parametersGBox, 0, 0)
 
 		generateButton = QtWidgets.QPushButton()
 		generateButton.setText("Generate")
+		generateButton.setToolTip("Generation assets with given parameters")
 		generateButton.clicked.connect(self.disableParameters)
 		generateButton.clicked.connect(self.startGeneration)
-		self.mainLayout.addWidget(generateButton, 1, 0)
 
 		''' RESULT '''
-		self.resultGBox = QtWidgets.QGroupBox("Result")
+		self.resultGBox = QtWidgets.QGroupBox()
 		self.resultGLayout = QtWidgets.QGridLayout()
 		self.resultGBox.setLayout(self.resultGLayout)
-		self.mainLayout.addWidget(self.resultGBox, 0, 1)
-		self.maxColumn = 4
+		self.maxColumn = 3
 		self.elementRow = 0
 		self.elementColumn = 0
 
-		nextGenerationButton = QtWidgets.QPushButton()
-		nextGenerationButton.setText("Next Generation")
-		nextGenerationButton.clicked.connect(self.nextGeneration)
-		self.mainLayout.addWidget(nextGenerationButton, 1, 1)
+		self.nextGenerationButton = QtWidgets.QPushButton()
+		self.nextGenerationButton.setText("Next Generation")
+		self.nextGenerationButton.clicked.connect(self.nextGeneration)
+		self.nextGenerationButton.setToolTip("Show next generation of assets")
+		
+		self.resultGBox.hide()
+		self.nextGenerationButton.hide()
+
+		''' CONTAINER '''
+		container = QtWidgets.QGroupBox()
+		container.setStyleSheet("QGroupBox {  border: none;}");
+		containerGLayout = QtWidgets.QGridLayout()
+		container.setLayout(containerGLayout)
+		
+		containerGLayout.addWidget(self.parametersGBox, 0, 0)
+		containerGLayout.addWidget(generateButton, 1, 0)
+		containerGLayout.addWidget(self.resultGBox, 0, 1)
+		containerGLayout.addWidget(self.nextGenerationButton, 1, 1)
+
+		self.mainLayout.addWidget(container)
 
 		self.setLayout(self.mainLayout)
 
@@ -159,8 +179,9 @@ class BaseWindow(QtWidgets.QWidget):
 		# Image
 		image = QtWidgets.QPushButton()
 		image.pressed.connect(individual.open)
-		image.setIconSize(QtCore.QSize(100, 100))
+		image.setIconSize(QtCore.QSize(200, 200))
 		image.setIcon(QtGui.QIcon(individual.image))
+		image.setToolTip("Open asset in Blender")
 		imageVLayout.addWidget(image)
 
 		imageGBox.setLayout(imageVLayout)
@@ -173,17 +194,23 @@ class BaseWindow(QtWidgets.QWidget):
 		weightSBox = QtWidgets.QSpinBox()
 		weightSBox.valueChanged.connect(individual.setWeight)
 		weightSBox.setValue(individual.weight)
+		weightSBox.setToolTip("Weight of the asset for the next generation")
 		buttonsHLayout.addWidget(weightSBox)
 
 		saveBtn = QtWidgets.QPushButton()
 		saveBtn.setText("Save")
 		saveBtn.pressed.connect(individual.createModel)
+		saveBtn.setToolTip("Save asset as obj file")
 		buttonsHLayout.addWidget(saveBtn)
 
 		imageVLayout.addWidget(buttonsGBox)
 		self.individualsWidget.append(imageGBox)
 
 	def generate(self):
+		self.resultGBox.show()
+		self.nextGenerationButton.show()
+		self.progressBar.show()
+
 		if len(self.individuals) > 0:
 			for i in range(len(self.individuals)):
 				self.assetController.genotypes[self.individuals[i].id].fitness = self.individuals[i].weight
@@ -218,6 +245,10 @@ class BaseWindow(QtWidgets.QWidget):
 			Communication.receivedata(None)
 			individual.setImage(imgpath)
 			self.addIndividual(individual)
+
+			self.progressBar.setValue(i * 100 / len(self.assetController.genotypes))
+
+		self.progressBar.hide()
 
 	def addButton(self, action):
 		btn = QtWidgets.QPushButton()

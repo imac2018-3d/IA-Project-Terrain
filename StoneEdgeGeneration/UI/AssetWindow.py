@@ -48,13 +48,6 @@ class AssetWindow(BaseWindow.BaseWindow):
 		self.alt_procreation = [key for key, value in self.alt_procreation_UI.values.items() if value == True][0]
 		self.show_mode = [key for key, value in self.show_mode_UI.values.items() if value == True][0]
 
-		# Communication.log(genetic_class)
-		# Communication.log(self.max_genotypes)
-		# Communication.log(self.selection_type)
-		# Communication.log(self.selection_type_param)
-		# Communication.log(self.alt_procreation)
-		# Communication.log(self.show_mode)
-
 		try:
 			self.assetController = genericgenetic.AssetGeneticsController(genetic_class,
 																		  max_genotypes=self.max_genotypes,
