@@ -26,7 +26,8 @@ class BaseWindow(QtWidgets.QWidget):
 		super(BaseWindow, self).__init__()
 		self.classes = {
 			'Crystal': ('StoneEdgeGeneration.Asset.generators.crystals', 'CrystalGenetic'),
-			'Terrain': ('StoneEdgeGeneration.Terrain.Map', 'MapGenetic')
+			'Terrain': ('StoneEdgeGeneration.Terrain.Map', 'MapGenetic'),
+			'Tree' : ('StoneEdgeGeneration.Asset.generators.Tree', 'TreeGenetic')
 		}
 		self.selectiontypes = {
 			"threshold": "threshold", "number": "number", "probability": "probability"
@@ -201,6 +202,7 @@ class BaseWindow(QtWidgets.QWidget):
 			)
 			Communication.sendcommand(self.assetController.get_genetic_class().net_compute_individual((0, 0, 0), data))
 			camerapos = self.assetController.get_genetic_class().camera_position()
+			Communication.log(str(camerapos))
 			Communication.sendcommand(
 				"import StoneEdgeGeneration.utils as utils\n"
 				"print(utils.getImagePath('" + str(individual) + "'))\n"
