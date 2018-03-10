@@ -1,7 +1,6 @@
 import numpy as np
 import noise
 import random
-from PIL import Image, ImageDraw, ImageFilter
 from scipy.spatial import voronoi_plot_2d
 from scipy.spatial import Voronoi
 from scipy.ndimage import filters
@@ -25,10 +24,12 @@ class RegionType(Enum):
 
 
 def array2RGB(arr, size):
+	from PIL import Image
 	arr = np.asarray(arr.reshape(arr.shape[0] * arr.shape[1], -1), np.uint8)
 	return Image.frombuffer('RGB', size, arr, 'raw', 'RGB', 0, 1)
 
 def array2L(arr, size):
+	from PIL import Image
 	arr = np.asarray(arr.reshape(arr.shape[0] * arr.shape[1], -1), np.uint8)
 	return Image.frombuffer('L', size, arr, 'raw', 'L', 0, 1)
 
