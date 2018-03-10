@@ -1,0 +1,66 @@
+* {
+	font-family: open-sans;
+	font-size: 13px;
+	background-color: #fff;
+	color: #492336;
+	text-transform: uppercase;
+}
+
+QLabel {
+	font-family: cinzel;
+	font-size: 16px;
+	margin: 10px 5px;
+}
+
+QLabel#h1 {
+	font-family: cinzel;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 10px 5px;
+	text-align: center;
+}
+
+QPushButton {
+  border-style: outset;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #492336;
+  color: #492336;
+  min-width: 200px;
+  padding: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+QPushButton#image {
+	background-color: #404040;
+	border: none;
+	min-width: 150px;
+}
+
+QToolTip {
+	text-transform: none;
+}
+
+QGroupBox {
+	border: none;
+}
+
+QProgressBar {
+    border: 1px solid #404040;
+    border-radius: 10px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: #fac959;
+    width: 20px;
+}
+
+QSpinBox, QDoubleSpinBox {
+    border: 1px solid #404040;
+    border-radius: 10px;
+    text-align: center;
+    padding: 5px;
+    min-width: 2em;
+}

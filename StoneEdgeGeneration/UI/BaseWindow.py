@@ -39,6 +39,11 @@ class BaseWindow(QtWidgets.QWidget):
 
 		self.mainLayout = QtWidgets.QVBoxLayout()
 
+		''' TITLE '''
+		title = QtWidgets.QLabel("Stone Edge - Assets Generation")
+		title.setObjectName("h1")
+		self.mainLayout.addWidget(title)
+
 		''' PROGRESS BAR '''
 		self.progressBar = QtWidgets.QProgressBar()
 		self.progressBar.setRange(0, 100)
@@ -51,6 +56,7 @@ class BaseWindow(QtWidgets.QWidget):
 		self.parametersGBox.setLayout(self.parametersVBoxLayout)
 
 		generateButton = QtWidgets.QPushButton()
+		generateButton.setObjectName("generate")
 		generateButton.setText("Generate")
 		generateButton.setToolTip("Generation assets with given parameters")
 		generateButton.clicked.connect(self.disableParameters)
@@ -65,6 +71,7 @@ class BaseWindow(QtWidgets.QWidget):
 		self.elementColumn = 0
 
 		self.nextGenerationButton = QtWidgets.QPushButton()
+		self.nextGenerationButton.setObjectName("nextGeneration")
 		self.nextGenerationButton.setText("Next Generation")
 		self.nextGenerationButton.clicked.connect(self.nextGeneration)
 		self.nextGenerationButton.setToolTip("Show next generation of assets")
@@ -74,14 +81,14 @@ class BaseWindow(QtWidgets.QWidget):
 		self.resultGBox.setWidgetResizable(True)
 		self.resultGBox.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
 		self.resultGBox.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-		self.resultGBox.setMinimumWidth(250)
+		self.resultGBox.setMinimumWidth(400)
 		
 		self.resultGBox.hide()
 		self.nextGenerationButton.hide()
 
 		''' CONTAINER '''
 		container = QtWidgets.QGroupBox()
-		container.setStyleSheet("QGroupBox {  border: none;}");
+		container.setObjectName("result")
 		containerGLayout = QtWidgets.QGridLayout()
 		container.setLayout(containerGLayout)
 		
@@ -180,6 +187,7 @@ class BaseWindow(QtWidgets.QWidget):
 
 		# Image
 		image = QtWidgets.QPushButton()
+		image.setObjectName("image")
 		image.pressed.connect(individual.open)
 		image.setIconSize(QtCore.QSize(200, 200))
 		image.setIcon(QtGui.QIcon(individual.image))

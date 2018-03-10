@@ -1,7 +1,7 @@
 import os, sys
 from importlib import reload
 
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtCore import QTimer
 
 from StoneEdgeGeneration.UI.BaseWindow import BaseWindow
@@ -12,11 +12,15 @@ from StoneEdgeGeneration.Communication.Communication import *
 import logging
 from logging.handlers import RotatingFileHandler
 
-
 class Client:
 	def __init__(self):
 		self.app = QtWidgets.QApplication(sys.argv)
 		self.app.setApplicationName("Stone Edge Generation")
+		self.app.setWindowIcon(QtGui.QIcon(os.path.abspath(os.path.realpath('./StoneEdgeGeneration/Resources/Icons/StoneEdge.png'))))
+		QtGui.QFontDatabase.addApplicationFont(os.path.abspath(os.path.realpath('./StoneEdgeGeneration/Resources/Fonts/open-sans.ttf')))
+		QtGui.QFontDatabase.addApplicationFont(os.path.abspath(os.path.realpath('./StoneEdgeGeneration/Resources/Fonts/cinzel.otf')))
+		stylesheet = open(os.path.abspath(os.path.realpath('./StoneEdgeGeneration/Resources/Stylesheets/app.qss'))).read()
+		self.app.setStyleSheet(stylesheet)
 		self.app.setQuitOnLastWindowClosed(True)
 		self.timer = QTimer()
 
