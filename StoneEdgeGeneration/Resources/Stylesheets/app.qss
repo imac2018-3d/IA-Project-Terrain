@@ -23,7 +23,6 @@ QLabel#h1 {
 QPushButton {
   border-style: outset;
   border-width: 1px;
-  border-radius: 10px;
   border-color: #492336;
   color: #492336;
   min-width: 200px;
@@ -48,7 +47,6 @@ QGroupBox {
 
 QProgressBar {
     border: 1px solid #404040;
-    border-radius: 10px;
     text-align: center;
 }
 
@@ -59,7 +57,6 @@ QProgressBar::chunk {
 
 QSpinBox, QDoubleSpinBox {
     border: 1px solid #404040;
-    border-radius: 10px;
     text-align: center;
     padding: 5px;
     min-width: 2em;

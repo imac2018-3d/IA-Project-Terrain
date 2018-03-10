@@ -33,9 +33,6 @@ class BaseWindow(QtWidgets.QWidget):
 			"threshold": "threshold", "number": "number", "probability": "probability"
 		}
 		self.altprocerations = {"True": True, "False": False}
-		self.showmodes = {
-			'all': 'all', 'solo': 'solo'
-		}
 
 		self.mainLayout = QtWidgets.QVBoxLayout()
 
@@ -106,19 +103,19 @@ class BaseWindow(QtWidgets.QWidget):
 		self.class_btn = self.addRadioButtons(classParameter)
 		self.class_btn.buttonPressed.connect(self.clearResults)
 
-		genCountParameter = Parameter.IntParameter("Maximum number per generation", 5, 3, 100)
+		genCountParameter = Parameter.IntParameter("Maximum number per generation", 5, 3, 100, tooltip="Number of assets to generate, per generation")
 		self.gen_count_spin = self.addSpinBox(genCountParameter)
 
 		selectionTypeParameter = Parameter.RadioButtonParameter("Type of selection", makeRadioParameters(self.selectiontypes))
 		self.select_type_btn = self.addRadioButtons(selectionTypeParameter)
-		selectionTypeParamParameter = Parameter.FloatParameter("Selection param", 0.5, 0, 1, 0.05)
-		self.select_type_param_spin = self.addDoubleSpinBox(selectionTypeParamParameter)
+		thresholdParameter = Parameter.FloatParameter("Threshold parameter ", 0.5, 0, 1, 0.05, tooltip="Fitness between 0 and 1")
+		self.threshold_parameter = self.addDoubleSpinBox(thresholdParameter)
+		numberParameter = Parameter.IntParameter("Number parameter ", 0, 1, self.gen_count_spin.value(), tooltip="Number of best assets to keep")
+		self.number_parameter = self.addSpinBox(numberParameter)
+		self.gen_count_spin.valueChanged.connect(lambda: self.number_parameter.setMaximum(self.gen_count_spin.value()))
 
 		altProcreationParameter = Parameter.RadioButtonParameter("Alternative procreation", makeRadioParameters(self.altprocerations))
 		self.alt_procreation_btn = self.addRadioButtons(altProcreationParameter)
-
-		showModeParameter = Parameter.RadioButtonParameter("Show mode", makeRadioParameters(self.showmodes))
-		self.show_mode_btn = self.addRadioButtons(showModeParameter)
 
 		self.assetController = self.makeAssetController()
 		self.individuals = []
@@ -128,16 +125,9 @@ class BaseWindow(QtWidgets.QWidget):
 		genetic_class = self.classes[self.class_btn.checkedButton().text()]
 		max_genotypes = self.gen_count_spin.value()
 		selection_type = self.selectiontypes[self.select_type_btn.checkedButton().text()]
-		selection_type_param = self.select_type_param_spin.value()
+		selection_type_param = self.threshold_parameter.value() if selection_type == "threshold" else self.number_parameter.value()
 		alt_procreation = self.altprocerations[self.alt_procreation_btn.checkedButton().text()]
-		show_mode = self.showmodes[self.show_mode_btn.checkedButton().text()]
-
-		Communication.log(genetic_class)
-		Communication.log(max_genotypes)
-		Communication.log(selection_type)
-		Communication.log(selection_type_param)
-		Communication.log(alt_procreation)
-		Communication.log(show_mode)
+		show_mode = 'solo'
 
 		return genericgenetic.AssetGeneticsController(genetic_class,
 													  max_genotypes=max_genotypes,
@@ -153,9 +143,9 @@ class BaseWindow(QtWidgets.QWidget):
 			genetic_class = self.classes[self.class_btn.checkedButton().text()]
 			max_genotypes = self.gen_count_spin.value()
 			selection_type = self.selectiontypes[self.select_type_btn.checkedButton().text()]
-			selection_type_param = self.select_type_param_spin.value()
+			selection_type_param = self.threshold_parameter.value() if selection_type == "threshold" else self.number_parameter.value()
 			alt_procreation = self.altprocerations[self.alt_procreation_btn.checkedButton().text()]
-			show_mode = self.showmodes[self.show_mode_btn.checkedButton().text()]
+			show_mode = 'solo'
 			self.assetController.reset(genetic_class,
 									  max_genotypes=max_genotypes,
 									  selection_type=selection_type,
@@ -291,6 +281,8 @@ class BaseWindow(QtWidgets.QWidget):
 		self.parametersVBoxLayout.addWidget(lbl)
 		spin = QtWidgets.QSpinBox()
 
+		spin.setToolTip(parameter.tooltip)
+
 		spin.setValue(parameter.value)
 		spin.setMinimum(parameter.min)
 		spin.setMaximum(parameter.max)
@@ -305,6 +297,8 @@ class BaseWindow(QtWidgets.QWidget):
 		lbl.setText(parameter.label)
 		self.parametersVBoxLayout.addWidget(lbl)
 		spin = QtWidgets.QDoubleSpinBox()
+
+		spin.setToolTip(parameter.tooltip)
 
 		spin.setValue(parameter.value)
 		spin.setMinimum(parameter.min)

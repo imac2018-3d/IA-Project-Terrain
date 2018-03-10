@@ -14,10 +14,13 @@ cd StoneEdgeGeneration
 
 echo "Python executable: ${python} - ${python_blender}"
 
-eval "${python} -m pip install -r requirements-client.txt"
-eval "${python_blender} -m pip install -r requirements-server.txt"
+eval "${python} -m pip install setuptools"
+eval "${python_blender} -m pip install setuptools"
+
+eval "${python} -m pip install --user -r requirements-client.txt"
+eval "${python_blender} -m pip install --user -r requirements-server.txt"
 
 echo "change directory to ${root}"
-cd $root
+cd "${root}"
 eval "${blender_path}/blender main.blend --python StoneEdgeGeneration/Communication/process_server.py"
  
