@@ -188,20 +188,22 @@ class BaseWindow(QtWidgets.QWidget):
 
 		# Save button and spinbox
 		buttonsGBox = QtWidgets.QGroupBox()
-		buttonsHLayout = QtWidgets.QHBoxLayout()
-		buttonsGBox.setLayout(buttonsHLayout)
+		buttonsVLayout = QtWidgets.QVBoxLayout()
+		buttonsGBox.setLayout(buttonsVLayout)
 
-		weightSBox = QtWidgets.QSpinBox()
-		weightSBox.valueChanged.connect(individual.setWeight)
-		weightSBox.setValue(individual.weight)
-		weightSBox.setToolTip("Weight of the asset for the next generation")
-		buttonsHLayout.addWidget(weightSBox)
+		weightSlider = QtWidgets.QSlider(Qt.Horizontal)
+		weightSlider.setMinimum(0)
+		weightSlider.setMaximum(100)
+		weightSlider.valueChanged.connect(individual.setWeight)
+		weightSlider.setValue(individual.weight)
+		weightSlider.setToolTip("Weight of the asset for the next generation")
+		buttonsVLayout.addWidget(weightSlider)
 
 		saveBtn = QtWidgets.QPushButton()
 		saveBtn.setText("Save")
 		saveBtn.pressed.connect(individual.createModel)
 		saveBtn.setToolTip("Save asset as obj file")
-		buttonsHLayout.addWidget(saveBtn)
+		buttonsVLayout.addWidget(saveBtn)
 
 		imageVLayout.addWidget(buttonsGBox)
 		self.individualsWidget.append(imageGBox)
@@ -210,6 +212,8 @@ class BaseWindow(QtWidgets.QWidget):
 		self.resultGBox.show()
 		self.nextGenerationButton.show()
 		self.progressBar.show()
+
+		self.progressBar.setValue(0)
 
 		if len(self.individuals) > 0:
 			for i in range(len(self.individuals)):
@@ -246,7 +250,7 @@ class BaseWindow(QtWidgets.QWidget):
 			individual.setImage(imgpath)
 			self.addIndividual(individual)
 
-			self.progressBar.setValue(i * 100 / len(self.assetController.genotypes))
+			self.progressBar.setValue((i+1) * 100 / len(self.assetController.genotypes))
 
 		self.progressBar.hide()
 		self.elementColumn = 0
