@@ -8,7 +8,7 @@ import copy
 class RockGenetic(GenericGenetic):
 	"""Représente un individu de cristal avec son génotype"""
 
-	min_subrockss = 1
+	min_subrocks = 1
 	max_subrocks = 4
 
 	min_cuts = 0
