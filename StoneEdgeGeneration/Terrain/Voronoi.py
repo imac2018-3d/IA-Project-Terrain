@@ -450,6 +450,8 @@ class VoronoiMap:
 		return image
 
 	def tomoisturemap(self):
+		from PIL import Image, ImageDraw
+
 		image = Image.new('L', (self.sizex, self.sizey), 0)
 		draw = ImageDraw.Draw(image)
 		for region in self.regions:
@@ -468,7 +470,7 @@ def main():
 	#voronoi_plot_2d(map.voronoimap)
 	#plt.show()
 	#plt.pause(1)
-	map = VoronoiMap(512,512,xx,yy,600,5,moisturestart=2)
+	map = VoronoiMap(512,512,xx,yy,600,5,moisturestart=5)
 	voronoi_plot_2d(map.voronoimap)
 	plt.show()
 	plt.pause(1)
@@ -480,6 +482,7 @@ def main():
 	plt.figure()
 	imageArr = np.asarray(image)  # Get array back
 	imgplot = plt.imshow(imageArr)
+	plt.colorbar(orientation="vertical")
 	plt.show()
 
 	plt.pause(3)
@@ -487,6 +490,7 @@ def main():
 	plt.figure()
 	imageArr = np.asarray(map.toheightmap())  # Get array back
 	imgplot = plt.imshow(imageArr)
+	plt.colorbar(orientation="vertical")
 	plt.show()
 
 	plt.pause(3)

@@ -26,10 +26,8 @@ def fastcosin(x):
     return cosinus[x]*sinus[x]
 
 def fastsinusoid(i,j,k):
-    k = int(k * (_lenangles - 1) / _twopi) % _lenangles
     return cosinus[int(i * (_lenangles - 1) / _twopi) % _lenangles] +\
-           sinus[int(j * (_lenangles - 1) / _twopi) % _lenangles] +\
-           cosinus[k] * sinus[k]
+           sinus[int(j * (_lenangles - 1) / _twopi) % _lenangles]
 
 def griddata(points, xx, yy, zz, xmin, xmax, ymin, ymax, zmin, zmax):
     XX = ((points.shape[0]-1) * ((xx - xmin) / (xmax - xmin))).astype(int)
@@ -152,7 +150,7 @@ def getrandomfunc(randomtype=0, seed=-1):
 
 
 def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
-               freq=5.0, mean=0., scale=5., seed=-1, randomtype=0):
+               freq=2.0, mean=0., scale=5., seed=-1, randomtype=0):
     start = time.time()
     xx, yy, zz, xmin, xmax, ymin, ymax, zmin, zmax, points = initheightmap(sizex, sizey, sizez, xx, yy, zz)
     randomfunc = getrandomfunc(int(randomtype), seed)
@@ -163,27 +161,34 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
     shiftx = randomfunc(1., scale)+randomfunc(1., scale)
     shifty = randomfunc(1., scale)+randomfunc(1., scale)
     shiftz = randomfunc(mean, scale)*0.5
+
     def func(x, y, z):
-        return fastsinusoid(shiftx+x*freqx, shifty+y*freqy, shiftz+z*freqz) * 0.3333
+        return fastsinusoid(shiftx+x*freqx, shifty+y*freqy, shiftz+z*freqz) * 0.333
 
     coefX, coefY, coefZ = 1/sizex, 1/sizey, 1/sizez
-    for i in range(points.shape[0]-3, 3):
-        for j in range(points.shape[1]-3, 3):
-            for k in range(points.shape[2]):
+    for i in range(0, points.shape[0]-2, 3):
+        for j in range(0, points.shape[1]-2, 3):
+            for k in range(0, points.shape[2]):
                 points[i][j][k] = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
-                points[i][j + 2][k] =\
-                    points[i+2][j][k] =\
-                    points[i+2][j+2][k] = func((i+2)*coefX-0.5, (j+2)*coefY-0.5, k*coefZ-0.5)
-                points[i+1][j][k] =\
-                    points[i][j+1][k] =\
-                    points[i+1][j+1][k] = (points[i][j][k]+points[i+2][j+2][k])*0.5
+                points[i + 2][j + 2][k] = func((i+2)*coefX-0.5, (j+2)*coefY-0.5, k*coefZ-0.5)
+                points[i + 1][j + 1][k] = (points[i][j][k] + points[i + 2][j + 2][k]) * 0.5
+                points[i + 1][j][k] = points[i][j][k]
+                points[i][j + 1][k] = points[i][j][k]
+                points[i][j + 2][k] = points[i + 1][j + 1][k]
+                points[i + 2][j][k] = points[i + 1][j + 1][k]
+                points[i + 2][j + 1][k] = points[i + 2][j][k]
+                points[i + 1][j + 2][k] = points[i][j + 2][k]
+
+    for i in range(points.shape[0]-2, points.shape[0]):
+        for j in range(points.shape[1]-2, points.shape[1]):
+            for k in range(0, points.shape[2]):
+                points[i][j][k] = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
 
 
-
-    randvalue = randomfunc(mean, scale, points.shape) * 0.3
+    randvalue = randomfunc(mean, scale, points.shape) * 0.5
     randvalue = randvalue + randomfunc(mean, scale, points.shape) * 0.1
     randvalue = randvalue - randomfunc(mean, scale, points.shape) * 0.2
-    points = (points + randvalue * 0.5) / 1.5
+    points = (points * 0.5 + randvalue * 0.5)
 
     if smooth:
         smooth3D(points)
@@ -210,28 +215,33 @@ def main():
         data = heightmap1(50,50,2, xx.flatten(), yy.flatten(), zz.flatten(), octaves=0.5+np.random.random_sample()*5,
                           lacunarity=0.5+np.random.random_sample()*5)
         points = np.stack((xx.flatten(),yy.flatten(),zz.flatten()), axis=-1)
+        #data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
+        #imgplot = plt.imshow(data[:,:,0])
+        #plt.clim(data.min(), data.max())
+        #plt.pause(1)
+        #data = heightmap1(50,50,2, xx.flatten(), yy.flatten(), zz.flatten(), smooth=True, octaves=0.5+np.random.random_sample()*5,
+        #                  lacunarity=0.5+np.random.random_sample()*5)
+        #data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
+        #imgplot = plt.imshow(data[:,:,0])
+        #plt.clim(data.min(), data.max())
+        #plt.pause(1)
+        data = heightmap2(50,50,2, xx.flatten(), yy.flatten(), zz.flatten(), smooth=True, randomtype=int(np.random.random_sample()*10))
         data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
+        plt.figure()
         imgplot = plt.imshow(data[:,:,0])
         plt.clim(data.min(), data.max())
         plt.pause(1)
-        data = heightmap1(50,50,2, xx.flatten(), yy.flatten(), zz.flatten(), smooth=True, octaves=0.5+np.random.random_sample()*5,
-                          lacunarity=0.5+np.random.random_sample()*5)
+
+        data = heightmap2(60, 60, 2, xx.flatten(), yy.flatten(), zz.flatten(), smooth=True, scale=0.1)
         data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
+        plt.figure()
         imgplot = plt.imshow(data[:,:,0])
         plt.clim(data.min(), data.max())
         plt.pause(1)
-        data = heightmap2(50,50,2, xx.flatten(), yy.flatten(), zz.flatten(), True, randomtype=int(np.random.random_sample()*10))
-        data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
-        imgplot = plt.imshow(data[:,:,0])
-        plt.clim(data.min(), data.max())
-        plt.pause(1)
-        data = heightmap2(60, 60, 2, xx.flatten(), yy.flatten(), zz.flatten(), True)
-        data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
-        imgplot = plt.imshow(data[:,:,0])
-        plt.clim(data.min(), data.max())
-        plt.pause(1)
+
         data = heightmap3(60, 60, 2, xx.flatten(), yy.flatten(), zz.flatten(), True)
         data = scipy.interpolate.griddata(points, data, (xx,yy,zz))
+        plt.figure()
         imgplot = plt.imshow(data[:,:,0])
         plt.clim(data.min(), data.max())
         plt.pause(1)

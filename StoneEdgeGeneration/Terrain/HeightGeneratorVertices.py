@@ -182,7 +182,9 @@ class OBJECT_OT_GenerateButton(bpy.types.Operator):
                 originalVertices = saveMesh(vertices)
                 bpy.context.scene['lastMapObject'] = bpy.context.object
             else:
-                originalVertices = loadVertices()
+				originalVertices = loadVertices()
+				if (len (originalVertices) != len (vertices)):
+					originalVertices = saveMesh(vertices)
         
         map = HeightMap.heightmap3(100, 100, 5, originalVertices[0,:,0], originalVertices[0,:,1], originalVertices[0,:,2],
                                    coefMap1=coefMapOne, coefMap2=coefMapTwo,
