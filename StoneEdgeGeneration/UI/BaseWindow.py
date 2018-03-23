@@ -27,7 +27,8 @@ class BaseWindow(QtWidgets.QWidget):
 		self.classes = {
 			'Crystal': ('StoneEdgeGeneration.Asset.generators.crystals', 'CrystalGenetic'),
 			'Terrain': ('StoneEdgeGeneration.Terrain.Map', 'MapGenetic'),
-			'Tree' : ('StoneEdgeGeneration.Asset.generators.Tree', 'TreeGenetic')
+			'Tree': ('StoneEdgeGeneration.Asset.generators.Tree', 'TreeGenetic'),
+			'Rock': ('StoneEdgeGeneration.Asset.generators.rocks', 'RockGenetic')
 		}
 		self.selectiontypes = {
 			"threshold": "threshold", "number": "number", "probability": "probability"
