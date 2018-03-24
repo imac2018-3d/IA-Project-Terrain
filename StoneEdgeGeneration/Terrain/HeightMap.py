@@ -169,8 +169,8 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
     for i in range(0, points.shape[0]-2, 3):
         for j in range(0, points.shape[1]-2, 3):
             for k in range(0, points.shape[2]):
-                points[i][j][k] = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
-                points[i + 2][j + 2][k] = func((i+2)*coefX-0.5, (j+2)*coefY-0.5, k*coefZ-0.5)
+                points[i][j][k] = func(i*coefX, j*coefY, k*coefZ)
+                points[i + 2][j + 2][k] = func((i+2)*coefX, (j+2)*coefY, k*coefZ)
                 points[i + 1][j + 1][k] = (points[i][j][k] + points[i + 2][j + 2][k]) * 0.5
                 points[i + 1][j][k] = points[i][j][k]
                 points[i][j + 1][k] = points[i][j][k]
@@ -182,13 +182,13 @@ def heightmap2(sizex, sizey, sizez, xx = None, yy = None, zz=None, smooth=True,
     for i in range(points.shape[0]-2, points.shape[0]):
         for j in range(points.shape[1]-2, points.shape[1]):
             for k in range(0, points.shape[2]):
-                points[i][j][k] = func(i*coefX-0.5, j*coefY-0.5, k*coefZ-0.5)
+                points[i][j][k] = func(i*coefX, j*coefY, k*coefZ)
 
 
-    randvalue = randomfunc(mean, scale, points.shape) * 0.5
-    randvalue = randvalue + randomfunc(mean, scale, points.shape) * 0.1
-    randvalue = randvalue - randomfunc(mean, scale, points.shape) * 0.2
-    points = (points * 0.5 + randvalue * 0.5)
+    randvalue = randomfunc(mean, scale, points.shape) * 0.2
+    randvalue = randvalue + randomfunc(mean, scale, points.shape) * 0.05
+    randvalue = randvalue - randomfunc(mean, scale, points.shape) * 0.1
+    points = (points * 0.7 + randvalue * 0.3)
 
     if smooth:
         smooth3D(points)

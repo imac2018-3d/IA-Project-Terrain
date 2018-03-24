@@ -220,10 +220,11 @@ class MapGenetic(GenericGenetic):
 
 		print("make height map : ", end - start, "s")
 
+		bpy.ops.object.mode_set(mode='EDIT')
+		bpy.ops.mesh.vertices_smooth(factor=0.5, repeat=1)
 		if genotype['height_smooth']:
-			bpy.ops.object.mode_set(mode='EDIT')
 			bpy.ops.mesh.vertices_smooth(factor=0.5, repeat=2)
-			bpy.ops.object.mode_set(mode='OBJECT')
+		bpy.ops.object.mode_set(mode='OBJECT')
 
 		mat = bpy.data.materials.new("map_mat")
 		mat.ambient = 0.4
