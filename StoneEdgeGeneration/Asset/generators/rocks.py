@@ -72,19 +72,19 @@ class RockGenetic(GenericGenetic):
 	def genotype_as_string(self):
 		buf = io.StringIO()
 		buf.write("- Begin genotype (" + str(len(self.genotype)) + " subrocks) -\n")
-		for idx, subcrystal in enumerate(self.genotype):
+		for idx, subrock in enumerate(self.genotype):
 			buf.write("#" + str(idx) + ": {\n\tcuts: [\n")
-			for cut in subcrystal['cuts']:
+			for cut in subrock['cuts']:
 				buf.write("\t\t" + str(cut[0]) + " " + str(cut[1]) + " " + str(cut[2]) + "\n")
 			buf.write("\t]\n\tscale: "
-					  + str(subcrystal['scale'][0]) + " "
-					  + str(subcrystal['scale'][1]) + " "
-					  + str(subcrystal['scale'][2])
+					  + str(subrock['scale'][0]) + " "
+					  + str(subrock['scale'][1]) + " "
+					  + str(subrock['scale'][2])
 					  + "\n")
 			buf.write("\torientation: "
-					  + str(subcrystal['orientation'][0]) + " "
-					  + str(subcrystal['orientation'][1]) + "\n")
-			buf.write("\toffset: " + str(subcrystal['offset']) + "\n")
+					  + str(subrock['orientation'][0]) + " "
+					  + str(subrock['orientation'][1]) + "\n")
+			buf.write("\toffset: " + str(subrock['offset']) + "\n")
 			buf.write("}\n")
 		buf.write("- End genotype -")
 
@@ -98,8 +98,8 @@ class RockGenetic(GenericGenetic):
 	@staticmethod
 	def net_compute_individual(location, data):
 		return \
-			"from StoneEdgeGeneration.Asset.generators.crystals import CrystalGenetic\n" \
-			"CrystalGenetic.compute_individual(("+str(location[0])+","+str(location[1])+","+str(location[0])+"),'" \
+			"from StoneEdgeGeneration.Asset.generators.rocks import RockGenetic\n" \
+			"RockGenetic.compute_individual(("+str(location[0])+","+str(location[1])+","+str(location[0])+"),'" \
 			+ data + "')"
 
 	@staticmethod
@@ -115,18 +115,18 @@ class RockGenetic(GenericGenetic):
 		bpy.context.scene.cursor_location = [0, 0, 0]
 
 		bpy.ops.object.add(type='EMPTY')
-		bpy.context.object.name = 'Crystal' + '%03d' % + GenericGenetic.bobject_unique_id()
+		bpy.context.object.name = 'Rock' + '%03d' % + GenericGenetic.bobject_unique_id()
 		print("\ncompute " + bpy.context.object.name)
 
 		parent_obj = bpy.context.object
-		for idx, subcrystal in enumerate(genotype):
+		for idx, subrock in enumerate(genotype):
 			bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=1, size=1,view_align=False,location=(0, 0, 0),
 												  enter_editmode=False)
 			bpy.context.object.parent = parent_obj
 			bpy.context.object.name = 'Sub' + parent_obj.name + '-' + str(idx)
 			object_ref = bpy.context.object
 
-			for cut in subcrystal['cuts']:
+			for cut in subrock['cuts']:
 				plane_co = bpyutils.spherical_to_xyz(cut[0], cut[1],cut[2])
 				plane_no = list(plane_co)
 				plane_no_magnitude = math.sqrt(sum([x ** 2 for x in plane_no]))
@@ -136,13 +136,13 @@ class RockGenetic(GenericGenetic):
 				bpy.ops.mesh.bisect(plane_co=plane_co,plane_no=plane_no,use_fill=True,
 									clear_inner=False, clear_outer=True, xstart=-100, xend=100,ystart=-100, yend=100)
 				bpy.ops.object.mode_set(mode='OBJECT')
-				object_ref.scale = (subcrystal['scale'][0], subcrystal['scale'][1], subcrystal['scale'][2])
-				bpy.context.object.rotation_euler[0] = subcrystal['orientation'][1]
-				bpy.context.object.rotation_euler[2] = subcrystal['orientation'][0]
+				object_ref.scale = (subrock['scale'][0], subrock['scale'][1], subrock['scale'][2])
+				bpy.context.object.rotation_euler[0] = subrock['orientation'][1]
+				bpy.context.object.rotation_euler[2] = subrock['orientation'][0]
 				object_ref.location = (
-					(subcrystal['scale'][2] + subcrystal['offset']) * math.sin(subcrystal['orientation'][0]) * math.sin(subcrystal['orientation'][1]),
-					(subcrystal['scale'][2] + subcrystal['offset']) * -math.cos(subcrystal['orientation'][0]) * math.sin(subcrystal['orientation'][1]),
-					(subcrystal['scale'][2] + subcrystal['offset']) * math.cos(subcrystal['orientation'][1])
+					(subrock['scale'][2] + subrock['offset']) * math.sin(subrock['orientation'][0]) * math.sin(subrock['orientation'][1]),
+					(subrock['scale'][2] + subrock['offset']) * -math.cos(subrock['orientation'][0]) * math.sin(subrock['orientation'][1]),
+					(subrock['scale'][2] + subrock['offset']) * math.cos(subrock['orientation'][1])
 				)
 			parent_obj.location = location
 			bpyutils.bpydeselect()
@@ -153,8 +153,8 @@ class RockGenetic(GenericGenetic):
 
 	def mutate_genotype(self):
 		"""Création d'une mutation : va au hasard modifier un des attributs. Possibilités :
-		- Ajouter un sous-crystal
-		- Supprimer un sous-crystal
+		- Ajouter un sous-rocher
+		- Supprimer un sous-rocher
 		- Ajouter un cut
 		- Retirer un cut
 		- Modifier un cut
@@ -165,44 +165,44 @@ class RockGenetic(GenericGenetic):
 		done = False  # Evitons les mutations illégales et retentons s'il y a une erreur
 		while not done:
 			randomid = random.randint(0, 7)
-			if randomid == 0:  # Ajouter un sous-crystal
-				if len(self.genotype) < self.max_subcrystals:
-					self.genotype.append(self.random_subcrystal_genotype())
+			if randomid == 0:  # Ajouter un sous-rocher
+				if len(self.genotype) < self.max_subrocks:
+					self.genotype.append(self.random_subrock_genotype())
 					done = True
-			elif randomid == 1:  # Supprimer un sous-crystal
-				if len(self.genotype) > self.min_subcrystals:
+			elif randomid == 1:  # Supprimer un sous-rocher
+				if len(self.genotype) > self.min_subrocks:
 					self.genotype.pop(random.randint(0, len(self.genotype) - 1))
 					done = True
 			elif randomid == 2:  # Ajouter un cut
-				sc = self.random_subcrystal()
+				sc = self.random_subrocks()
 				if len(sc['cuts']) < self.max_cuts:
 					sc['cuts'].append(self.random_cut_genotype())
 					done = True
 			elif randomid == 3:  # Retirer un cut
-				sc = self.random_subcrystal()
+				sc = self.random_subrocks()
 				if len(sc['cuts']) > self.min_cuts:
 					sc['cuts'].pop(random.randint(0, len(sc['cuts']) - 1))
 					done = True
 			elif randomid == 4:  # Modifier un cut
-				sc = self.random_subcrystal()
+				sc = self.random_subrocks()
 				if len(sc['cuts']) > 0:
 					sc['cuts'][random.randint(0, len(sc['cuts']) - 1)] = self.random_cut_genotype()
 					done = True
 			elif randomid == 5:  # Modifier un scale
-				sc = self.random_subcrystal()
+				sc = self.random_subrocks()
 				sc['scale'] = self.random_scale_genotype()
 				done = True
 			elif randomid == 6:  # Modifier une orientation
-				sc = self.random_subcrystal()
+				sc = self.random_subrocks()
 				sc['orientation'] = self.random_orientation_genotype()
 				done = True
 			elif randomid == 7:  # Modifier un offset
-				sc = self.random_subcrystal()
+				sc = self.random_subrocks()
 				sc['offset'] = self.random_offset_genotype()
 				done = True
 
-	def random_subcrystal(self):
-		"""returns a random subcrystal in genotype (reference, so mutable in place)"""
+	def random_subrocks(self):
+		"""returns a random subrock in genotype (reference, so mutable in place)"""
 		return self.genotype[random.randint(0, len(self.genotype) - 1)]
 
 	# Genotype cross generation --------------------------------------------------------------------------------------------
@@ -211,16 +211,16 @@ class RockGenetic(GenericGenetic):
 	def cross_genotypes(geno1, geno2):
 		"calcule trois enfants différents : moyenne, moitié 1 et moitié 2"
 		return [
-			CrystalGenetic.cross_genotype_mean(geno1, geno2),
-			CrystalGenetic.cross_genotype_firsthalf(geno1, geno2),
-			CrystalGenetic.cross_genotype_lasthalf(geno1, geno2)
+			RockGenetic.cross_genotype_mean(geno1, geno2),
+			RockGenetic.cross_genotype_firsthalf(geno1, geno2),
+			RockGenetic.cross_genotype_lasthalf(geno1, geno2)
 		]
 
 	@staticmethod
 	def cross_genotype_mean(geno1, geno2):
 		"""Calcule le génotype moyen des deux parents"""
 		child = []
-		# le nombre de subcrystals est le minimum des deux parents
+		# le nombre de subrocks est le minimum des deux parents
 		for sc1, sc2 in zip(geno1, geno2):
 			cuts = []
 			for c1, c2 in zip(sc1['cuts'], sc2['cuts']):
@@ -234,7 +234,7 @@ class RockGenetic(GenericGenetic):
 				'orientation': orientation,
 				'offset': offset
 			})
-		return CrystalGenetic(child)
+		return RockGenetic(child)
 
 	@staticmethod
 	def cross_genotype_firsthalf(geno1, geno2):
@@ -244,7 +244,7 @@ class RockGenetic(GenericGenetic):
 			child.append(copy.deepcopy(sc))
 		for sc in geno2[len(geno2)//2:]:
 			child.append(copy.deepcopy(sc))
-		return CrystalGenetic(child)
+		return RockGenetic(child)
 
 	@staticmethod
 	def cross_genotype_lasthalf(geno1, geno2):
@@ -254,7 +254,7 @@ class RockGenetic(GenericGenetic):
 			child.append(copy.deepcopy(sc))
 		for sc in geno1[len(geno1) // 2:]:
 			child.append(copy.deepcopy(sc))
-		return CrystalGenetic(child)
+		return RockGenetic(child)
 
 
 	# Fitness computation --------------------------------------------------------------------------------------------------
